@@ -1,4 +1,3 @@
-
 <?php
 
 // Make a web request for a short link to the Wikipedia article
@@ -24,4 +23,3 @@ $xml = simplexml_load_string($xmlstring);
 
 
 ?>
-
