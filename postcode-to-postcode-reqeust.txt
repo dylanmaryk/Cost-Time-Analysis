@@ -1,0 +1,1 @@
+http://journeyplanner.tfl.gov.uk/user/XML_TRIP_REQUEST2?language=en&sessionID=0&place_origin=London&type_origin=locator&name_origin=SW1H%200BD&place_destination=London&type_destination=locator&name_destination=AL2%201AE
