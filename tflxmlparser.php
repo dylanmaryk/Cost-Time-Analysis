@@ -1,10 +1,11 @@
 <?php
-
+$originpostcode = 'AL2%201AE';
+$destinationpostcode = 'SW1H%200BD';
 // Make a web request for a short link to the Wikipedia article
 $curl = curl_init();
-$tflurlquery = 'http://journeyplanner.tfl.gov.uk/user/XML_TRIP_REQUEST2?language=en&place_origin=London&place_destination=London&type_origin=locator&name_origin=SW1H%200BD&type_destination=locator&name_destination=AL2%201AE';
+$tflurlquery = 'http://journeyplanner.tfl.gov.uk/user/XML_TRIP_REQUEST2?language=en&place_origin=London&place_destination=London&type_origin=locator&name_origin=';
 $tflurlquery .= $originpostcode;
-$tflurlquery .= '&place_destination=London&type_destination=locator&name_destination=';
+$tflurlquery .= '&type_destination=locator&name_destination=';
 $tflurlquery .= $destinationpostcode;
 // use if we want to allow future calculations
 //$tflurlquery .= '&itdDate=' .$date. ' &itdTime=' $time;
