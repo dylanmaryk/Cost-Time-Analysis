@@ -5,9 +5,10 @@ $curl = curl_init();
 
 $tflurlquery = 'http://journeyplanner.tfl.gov.uk/user/XML_TRIP_REQUEST2?language=en&place_origin=London&type_origin=locator&name_origin=';
 $tflurlquery .= $originpostcode;
-$tflurlquery .= '&place_destination=London&type_destination=stop&name_destination=';
+$tflurlquery .= '&place_destination=London&type_destination=locator&name_destination=';
 $tflurlquery .= $destinationpostcode;
-$tflurlquery .= '&itdDate=' .$date. ' &itdTime=' $time;
+// use if we want to allow future calculations
+//$tflurlquery .= '&itdDate=' .$date. ' &itdTime=' $time;
 
 curl_setopt_array($curl, array(
 CURLOPT_RETURNTRANSFER => 1,
