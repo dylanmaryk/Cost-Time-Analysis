@@ -19,8 +19,10 @@ CURLOPT_USERAGENT => 'INSERT_DESCRIPTION_OF_SERVICE, INSERT_EMAIL_ADDRESS'
 $xmlstring = curl_exec($curl);
 //probably should check this
 $responsecode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-echo $xmlstring;
+//echo $xmlstring;
 $xml = simplexml_load_string($xmlstring);
-
-
+//var_dump($xml);
+$routes = $xml->itdTripRequest->itdItinerary->itdRouteList;
+var_dump($routes);
+echo $routes->asXML();
 ?>
