@@ -40,6 +40,21 @@ $xmlroutes = $xml->itdTripRequest->itdItinerary->itdRouteList;
 // iterate through all the routes and print out the start and end times.
 $i = 0;
 
+$meansOfTransportCodes = array(
+	0 => 'National Rail',
+	1 => 'Docklands Light Railway',
+	2 => 'London Underground',
+	3 => 'London Overground',
+	4 => 'Tram',
+	5 => 'London Buses',
+	6 => 'Bus',
+	7 => 'Not Used',
+	8 => 'Emirates Airline',
+	9 => 'London',
+	10 => 'Not Used',
+	11 => 'Replacement Buses')
+
+
 $routes = array();
 foreach ($xmlroutes->itdRoute as $route) {
 	
