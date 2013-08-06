@@ -50,8 +50,7 @@ foreach ($routes->itdRoute as $route) {
 	
 	$travelTime = $route['publicDuration'];
 	
-	//var_dump($endTime);
-	//echo htmlentities($endTime->asXML());
+	$detailsLink = $tflurlquery . "&tripSelector" . $i + 1 . "=1&itdLPxx_view=detail";
 	
 	echo "Route " . $i . " start time " . $startHour . ":" . $startMinute
 	. ", end time " . $endHour . ":" . $endMinute . ", total travel time "
