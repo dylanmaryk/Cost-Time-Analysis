@@ -52,7 +52,7 @@ $meansOfTransportCodes = array(
 	8 => 'Emirates Airline',
 	9 => 'London',
 	10 => 'Not Used',
-	11 => 'Replacement Buses')
+	11 => 'Replacement Buses');
 
 
 $routes = array();
