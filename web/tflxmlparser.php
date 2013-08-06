@@ -50,19 +50,31 @@ $i = 0;
         <thead>
           <th></th>
           <th><b>Start Time</b></th>
+          <th><b>End Time</b></th>
         </thead>
         <tbody>
           <?php
             foreach ($routes->itdRoute as $route) {
               $i++;
+
+              $prl = $route->itdPartialRouteList;
               
-              $time = $route->itdPartialRouteList->itdPartialRoute->itdPoint->itdDateTime->itdTime;
-              $hour = $time['hour'];
-              $minute = $time['minute'];
+              $startTime = $prl->itdPartialRoute->itdPoint->itdDateTime->itdTime;
+              $startHour = $startTime['hour'];
+              $startMinute = $startTime['minute'];
+              
+              $endpr = $prl->itdPartialRoute[count($prl->itdPartialRoute) - 1];
+              $endTime = $endpr->itdPoint[count($endpr->itdPoint) - 1]->itdDateTime->itdTime;
+              $endHour = $endTime['hour'];
+              $endMinute = $endTime['minute'];
+
+              $startTimeFormatted = $startHour . ":" . $startMinute;
+              $endTimeFormatted = $endHour . ":" . $endMinute;
 
               echo "<tr>";
               echo "<td><b>Route " . $i . "</b></td>";
-              echo "<td>" . $hour . " hr " . $minute . " min" . "</td>";
+              echo "<td>" . date ('H:i', strtotime($startTimeFormatted)) . "</td>";
+              echo "<td>" . date ('H:i', strtotime($endTimeFormatted)) . "</td>";
               echo "</tr>";
             }
           ?>
