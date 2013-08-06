@@ -1,8 +1,12 @@
 <?php
 
+$DEBUG = false;
+
 // report all errors to page
-error_reporting(E_ALL);
-ini_set('display_errors', 'on');
+if ($DEBUG) {
+	error_reporting(E_ALL);
+	ini_set('display_errors', 'on');
+}
 
 $originpostcode = 'AL2 1AE';
 $destinationpostcode = 'SW1H 0BD';
@@ -55,12 +59,14 @@ foreach ($xmlroutes->itdRoute as $route) {
 	$detailsLink = $tflurlquery . "&tripSelector" . $i + 1 . "=1&itdLPxx_view=detail";
 	
 
-	$routes[$i] = array()
+	$routes[$i] = array();
 	$routes[$i]['departure'] = $startHour . ":" . $startMinute;
 	$routes[$i]['arrival'] = $endHour . ":" . $endMinute;
 	$routes[$i]['duration'] = $travelTime;
 	$routes[$i]['detailsLink'] = $detailsLink;
-        $i++;
+    $i++;
 }
+
+if ($DEBUG) var_dump($routes);
 
 ?>
