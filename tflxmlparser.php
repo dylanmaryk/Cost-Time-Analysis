@@ -38,16 +38,17 @@ foreach ($routes->itdRoute as $route) {
 	//$starthour = $route->itdPartialRouteList->itdPartialRoute[0]->itdPoint[0]->itdDateTime->itdTime['hour'];
 	//echo $starthour;
 	
-	$partialroute = $route->itdPartialRouteList->itdPartialRoute;
-	var_dump($partialroute);
-	echo "<br /><br /><hr /><br /><br />";
-	echo $partialroute->asXML();
-	echo "<br /><br /><hr /><br /><br />";
+	//$partialroute = $route->itdPartialRouteList->itdPartialRoute;
+	//$partialroute = $route->xpath('itdPartialRouteList/itdPartialRoute[1]');
+	var_dump($partialroute[0][0]);
+	echo "\n\n\n<br /><br /><hr /><br /><br />\n\n\n";
+	echo htmlentities($partialroute[0][0]->asXML());
+	echo "\n\n\n<br /><br /><hr /><br /><br />\n\n\n";
 	
 	var_dump($route);
-	echo "<br /><br /><hr /><br /><br />";
-	echo $route->asXML();
-	echo "<br /><br /><hr /><br /><br />";
+	echo "\n\n\n<br /><br /><hr /><br /><br />\n\n\n";
+	echo htmlentities($route->asXML());
+	echo "\n\n\n<br /><br /><hr /><br /><br />\n\n\n";
 }
 
 ?>
