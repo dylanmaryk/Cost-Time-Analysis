@@ -37,25 +37,23 @@ $routes = $xml->itdTripRequest->itdItinerary->itdRouteList;
 $i = 0;
 foreach ($routes->itdRoute as $route) {
 	$i++;
-	//$starthour = $route->itdPartialRouteList->itdPartialRoute[0]->itdPoint[0]->itdDateTime->itdTime['hour'];
-	//echo $starthour;
+	$prl = $route->itdPartialRouteList;
 	
-	//$partialroute = $route->itdPartialRouteList->itdPartialRoute;
-	//$partialroute = $route->xpath('itdPartialRouteList/itdPartialRoute[1]');
-	$time = $route->itdPartialRouteList->itdPartialRoute->itdPoint->itdDateTime->itdTime;
-	$hour = $time['hour'];
-	$minute = $time['minute'];
-	//var_dump($time);
-	//echo "\n\n\n<br /><br /><hr /><br /><br />\n\n\n";
-	echo "Route " . $i . " start time " . $hour . ":" . $minute;
-	echo "\n\n\n<br /><br /><hr /><br /><br />\n\n\n";
+	$startTime = $prl->itdPartialRoute->itdPoint->itdDateTime->itdTime;
+	$startHour = $startTime['hour'];
+	$startMinute = $startTime['minute'];
 	
-	/*
-	var_dump($route);
+	$endpr = $prl->itdPartialRoute[count($prl->itdPartialRoute) - 1];
+	$endTime = $endpr->itdPoint[count($endpr->itdPoint) - 1]->itdDateTime->itdTime;
+	$endHour = $endTime['hour'];
+	$endMinute = $endTime['minute'];
+	
+	//var_dump($endTime);
+	//echo htmlentities($endTime->asXML());
+	
+	echo "Route " . $i . " start time " . $startHour . ":" . $startMinute
+	. ", end time " . $endHour . ":" . $endMinute;
 	echo "\n\n\n<br /><br /><hr /><br /><br />\n\n\n";
-	echo htmlentities($route->asXML());
-	echo "\n\n\n<br /><br /><hr /><br /><br />\n\n\n";
-	 */
 }
 
 ?>
