@@ -1,5 +1,9 @@
 <?php
 
+// report all errors to page
+error_reporting(E_ALL);
+ini_set('display_errors', 'on');
+
 $originpostcode = 'AL2 1AE';
 $destinationpostcode = 'SW1H 0BD';
 $safeorigin = urlencode($originpostcode);
@@ -30,8 +34,26 @@ $routes = $xml->itdTripRequest->itdItinerary->itdRouteList;
 //echo $routes->asXML();
 
 // iterate through all the routes and print out the start and end times.
+$i = 0;
 foreach ($routes->itdRoute as $route) {
-	$starthour = $route->itdPartialRouteList->itdPartialRoute[0]->itdPoint[0]->itdDateTime->itdTime['hour'];
-	echo $starthour;
+	$i++;
+	$prl = $route->itdPartialRouteList;
+	
+	$startTime = $prl->itdPartialRoute->itdPoint->itdDateTime->itdTime;
+	$startHour = $startTime['hour'];
+	$startMinute = $startTime['minute'];
+	
+	$endpr = $prl->itdPartialRoute[count($prl->itdPartialRoute) - 1];
+	$endTime = $endpr->itdPoint[count($endpr->itdPoint) - 1]->itdDateTime->itdTime;
+	$endHour = $endTime['hour'];
+	$endMinute = $endTime['minute'];
+	
+	//var_dump($endTime);
+	//echo htmlentities($endTime->asXML());
+	
+	echo "Route " . $i . " start time " . $startHour . ":" . $startMinute
+	. ", end time " . $endHour . ":" . $endMinute;
+	echo "\n\n\n<br /><br /><hr /><br /><br />\n\n\n";
 }
+
 ?>
