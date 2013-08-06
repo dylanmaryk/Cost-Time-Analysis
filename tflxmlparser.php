@@ -39,9 +39,13 @@ foreach ($routes->itdRoute as $route) {
 	//echo $starthour;
 	
 	$partialroute = $route->itdPartialRouteList->itdPartialRoute;
+	var_dump($partialroute);
+	echo "<br /><br /><hr /><br /><br />";
 	echo $partialroute->asXML();
 	echo "<br /><br /><hr /><br /><br />";
 	
+	var_dump($route);
+	echo "<br /><br /><hr /><br /><br />";
 	echo $route->asXML();
 	echo "<br /><br /><hr /><br /><br />";
 }
