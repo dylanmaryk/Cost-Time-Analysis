@@ -38,7 +38,7 @@ foreach ($routes->itdRoute as $route) {
 	//$starthour = $route->itdPartialRouteList->itdPartialRoute[0]->itdPoint[0]->itdDateTime->itdTime['hour'];
 	//echo $starthour;
 	
-	//$partialroute = $route->itdPartialRouteList->itdPartialRoute;
+	$partialroute = $route->itdPartialRouteList->itdPartialRoute;
 	//$partialroute = $route->xpath('itdPartialRouteList/itdPartialRoute[1]');
 	var_dump($partialroute[0][0]);
 	echo "\n\n\n<br /><br /><hr /><br /><br />\n\n\n";
