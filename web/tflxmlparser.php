@@ -46,15 +46,15 @@ foreach ($xmlroutes->itdRoute as $route) {
 	$prl = $route->itdPartialRouteList;
 	
 	$startTime = $prl->itdPartialRoute->itdPoint->itdDateTime->itdTime;
-	$startHour = $startTime['hour']->AsXML();
-	$startMinute = $startTime['minute']->AsXML();
+	$startHour = $startTime['hour'];
+	$startMinute = $startTime['minute'];
 	
 	$endpr = $prl->itdPartialRoute[count($prl->itdPartialRoute) - 1];
 	$endTime = $endpr->itdPoint[count($endpr->itdPoint) - 1]->itdDateTime->itdTime;
-	$endHour = $endTime['hour']->AsXML();
-	$endMinute = $endTime['minute']->AsXML();
+	$endHour = $endTime['hour'];
+	$endMinute = $endTime['minute'];
 	
-	$travelTime = $route['publicDuration']->AsXML();
+	$travelTime = $route['publicDuration'];
 	
 	$detailsLink = $tflurlquery . "&tripSelector" . $i + 1 . "=1&itdLPxx_view=detail";
 	
