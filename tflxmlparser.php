@@ -14,9 +14,9 @@ $tflurlquery .= $safedestination;
 
 $curl = curl_init();
 curl_setopt_array($curl, array(
-CURLOPT_RETURNTRANSFER => 1,
-CURLOPT_URL => $tflurlquery,
-CURLOPT_USERAGENT => 'INSERT_DESCRIPTION_OF_SERVICE, INSERT_EMAIL_ADDRESS'
+	CURLOPT_RETURNTRANSFER => 1,
+	CURLOPT_URL => $tflurlquery,
+	CURLOPT_USERAGENT => 'INSERT_DESCRIPTION_OF_SERVICE, INSERT_EMAIL_ADDRESS'
 ));
 
 $xmlstring = curl_exec($curl);
@@ -30,7 +30,8 @@ $routes = $xml->itdTripRequest->itdItinerary->itdRouteList;
 //echo $routes->asXML();
 
 // iterate through all the routes and print out the start and end times.
-foreach ($routes as $route) {
-   echo ;
+foreach ($routes->itdRoute as $route) {
+	$starthour = $route->itdPartialRouteList->itdPartialRoute[0]->itdPoint[0]->itdDateTime->itdTime['hour'];
+	echo $starthour;
 }
 ?>
