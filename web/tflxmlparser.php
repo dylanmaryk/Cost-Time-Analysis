@@ -55,10 +55,10 @@ foreach ($xmlroutes->itdRoute as $route) {
 	$detailsLink = $tflurlquery . "&tripSelector" . $i + 1 . "=1&itdLPxx_view=detail";
 	
 
-	$routes[$i] = array()
-	$routes[$i]['departure'] = $startHour . ":" . $startMinute;
-	$routes[$i]['arrival'] = $endHour . ":" . $endMinute;
-	$routes[$i]['duration'] = $travelTime;
+	$routes[$i] = array();
+	$routes[$i]['departure'] = date ('H:i', strtotime($startHour . ":" . $startMinute));
+	$routes[$i]['arrival'] = date ('H:i', strtotime($endHour . ":" . $endMinute));
+	$routes[$i]['duration'] = date ('H:i', strtotime($travelTime));
 	$routes[$i]['detailsLink'] = $detailsLink;
         $i++;
 }

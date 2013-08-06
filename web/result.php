@@ -22,14 +22,18 @@
         </thead>
         <tbody>
           <?php
-            foreach ($routes as $route) {
+            $i = 1;
+
+            foreach ($routes as $routeElement) {
               echo "<tr>";
               echo "<td><b>Route " . $i . "</b></td>";
-              echo "<td>" . date ('H:i', strtotime($startTimeFormatted)) . "</td>";
-              echo "<td>" . date ('H:i', strtotime($endTimeFormatted)) . "</td>";
-              echo "<td>" . date ('H:i', strtotime($travelTime)) . "</td>";
-              echo "<td><a href=" .  . ">View Details</a></td>";
+              echo "<td>" . $routeElement['departure'] . "</td>";
+              echo "<td>" . $routeElement['arrival'] . "</td>";
+              echo "<td>" . $routeElement['duration'] . "</td>";
+              echo "<td>" . $routeElement['detailsLink'] . "</td>";
               echo "</tr>";
+
+              $i++;
             }
           ?>
         </tbody>
