@@ -31,7 +31,9 @@ $routes = $xml->itdTripRequest->itdItinerary->itdRouteList;
 
 // iterate through all the routes and print out the start and end times.
 foreach ($routes->itdRoute as $route) {
-	$starthour = $route->itdPartialRouteList->itdPartialRoute[0]->itdPoint[0]->itdDateTime->itdTime['hour'];
-	echo $starthour;
+	//$starthour = $route->itdPartialRouteList->itdPartialRoute[0]->itdPoint[0]->itdDateTime->itdTime['hour'];
+	//echo $starthour;
+	echo $route->asXML();
+	echo "<br /><br /><hr /><br /><br />";
 }
 ?>
