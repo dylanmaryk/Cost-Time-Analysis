@@ -30,7 +30,7 @@
               echo "<td>" . $routeElement['departure'] . "</td>";
               echo "<td>" . $routeElement['arrival'] . "</td>";
               echo "<td>" . $routeElement['duration'] . "</td>";
-              echo "<td>" . $routeElement['detailsLink'] . "</td>";
+              echo "<td><a href=\"" . $routeElement['detailsLink'] . "\">View Details</a></td>";
               echo "</tr>";
 
               $i++;
@@ -38,25 +38,6 @@
           ?>
         </tbody>
       </table>
-      <!-- <table class="table">
-        <thead>
-          <th></th>
-          <th><b>Time</b></th>
-          <th><b>Cost</b></th>
-        </thead>
-        <tbody>
-          <tr>
-            <td><b>Bus</b></td>
-            <td>1 hr 15 mins</td>
-            <td>&pound;2.20</td>
-          </tr>
-          <tr>
-            <td><b>Tube</b></td>
-            <td>45 mins</td>
-            <td>&pound;4.30</td>
-          </tr>
-        </tbody>
-      </table> -->
     </div>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
