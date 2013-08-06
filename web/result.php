@@ -34,7 +34,9 @@
               <td><?php echo $routeElement['duration']  ?></td>
               <td><a href="<?php echo $routeElement['detailsLink'] ?>">View Details</a></td>
               <td><?php foreach ($routeElement['interchanges'] as $interchange) {
-                echo $interchange;
+                echo '<img src="' . $transportImagesDomain
+                . $transportImages[$interchange] . '" alt="'
+                . $transportNames[$interchange] . '" />';
               } ?></td>
               </tr>
 

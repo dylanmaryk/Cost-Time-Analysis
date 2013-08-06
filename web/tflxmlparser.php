@@ -86,8 +86,10 @@ foreach ($xmlroutes->itdRoute as $route) {
 	$j = 0;
 	foreach ($prl->itdPartialRoute as $partialRoute) {
 		$method = $partialRoute->itdMeansOfTransport['productName'];
-		$interchanges[$j] = $method . "";
-		$j++;
+		if ($method . "" != "") {
+			$interchanges[$j] = $method . "";
+			$j++;
+		}
 	}
 	
 	$detailsLink = 'http://journeyplanner.tfl.gov.uk/user/XSLT_TRIP_REQUEST2'
