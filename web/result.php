@@ -22,7 +22,7 @@
         </thead>
         <tbody>
           <?php
-            foreach ($routesas $route) {
+            foreach ($routes as $route) {
 			  // Dylan, change this to use $routes['stuff'];
               echo "<tr>";
               echo "<td><b>Route " . $i . "</b></td>";
