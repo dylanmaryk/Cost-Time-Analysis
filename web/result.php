@@ -18,6 +18,7 @@
           <th><b>Start Time</b></th>
           <th><b>End Time</b></th>
           <th><b>Travel Time</b></th>
+          <th><b>Interchanges</b></th>
           <th></th>
         </thead>
         <tbody>
@@ -25,15 +26,31 @@
             $i = 1;
 
             foreach ($routes as $routeElement) {
+<<<<<<< HEAD
               echo "<tr>";
               echo "<td><b>Route " . $i . "</b></td>";
               echo "<td>" . $routeElement['departure'] . "</td>";
               echo "<td>" . $routeElement['arrival'] . "</td>";
               echo "<td>" . $routeElement['duration'] . "</td>";
               echo "<td><a href=\"" . $routeElement['detailsLink'] . "\">View Details</a></td>";
+              echo "<td>";
+              foreach ($routeElement['interchanges'] as $interchange) {
+                echo $interchange;
+              }
+              echo "</td>";
               echo "</tr>";
+=======
+              ?>
+              <tr>
+              <td><b>Route <?php echo $i ?></b></td>
+              <td> <?php echo $routeElement['departure'] ?></td>
+              <td> <?php echo $routeElement['arrival']   ?></td>
+              <td> <?php echo $routeElement['duration']  ?></td>
+              <td><a href=" <?php echo $routeElement['detailsLink'] ?> ">View Details</a></td>
+              </tr>
+>>>>>>> b4e9ae36dca38142a645ab264b70b43a9b2b121f
 
-              $i++;
+              <?php $i++;
             }
           ?>
         </tbody>
