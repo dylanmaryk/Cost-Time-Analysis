@@ -1,6 +1,6 @@
 <?php
 
-$DEBUG = true;
+$DEBUG = FALSE;
 
 // report all errors to page
 if ($DEBUG) {
