@@ -25,11 +25,13 @@ $meansOfTransportCodes = array(
 $transportNames = array();
 $transportNames['Fussweg'] = 'Walk';
 $transportNames['Bus'] = 'Bus';
+$transportNames['Underground'] = 'Tube';
 
 $transportImagesDomain = 'http://journeyplanner.tfl.gov.uk';
 $transportImages = array();
 $transportImages['Fussweg'] = '/user/assets/images/icon-walk.gif';
 $transportImages['Bus'] = '/user/assets/images/icon-buses.gif';
+$transportImages['Underground'] = '/user/assets/images/icon-tube.gif';
 
 $originpostcode = 'AL2 1AE';
 $destinationpostcode = 'SW1H 0BD';
