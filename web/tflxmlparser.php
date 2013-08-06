@@ -56,13 +56,13 @@ foreach ($xmlroutes->itdRoute as $route) {
 	
 	$travelTime = $route['publicDuration'];
 	
-	$detailsLink = $tflurlquery . "&tripSelector" . $i + 1 . "=1&itdLPxx_view=detail";
+	$detailsLink = $tflurlquery . "&tripSelector" . ($i + 1) . "=1&itdLPxx_view=detail";
 	
 
 	$routes[$i] = array();
 	$routes[$i]['departure'] = $startHour . ":" . $startMinute;
 	$routes[$i]['arrival'] = $endHour . ":" . $endMinute;
-	$routes[$i]['duration'] = $travelTime;
+	$routes[$i]['duration'] = $travelTime[0];
 	$routes[$i]['detailsLink'] = $detailsLink;
     $i++;
 }
