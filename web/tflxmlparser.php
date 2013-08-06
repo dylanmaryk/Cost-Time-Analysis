@@ -75,15 +75,9 @@ foreach ($xmlroutes->itdRoute as $route) {
 	
 
 	$routes[$i] = array();
-<<<<<<< HEAD
 	$routes[$i]['departure'] = date ('H:i', strtotime($startHour . ":" . $startMinute));
 	$routes[$i]['arrival'] = date ('H:i', strtotime($endHour . ":" . $endMinute));
 	$routes[$i]['duration'] = date ('H:i', strtotime($travelTime));
-=======
-	$routes[$i]['departure'] = $startHour . ":" . $startMinute;
-	$routes[$i]['arrival'] = $endHour . ":" . $endMinute;
-	$routes[$i]['duration'] = $travelTime;
->>>>>>> 285704250df93304904276b5870cc079ea5c1c00
 	$routes[$i]['detailsLink'] = $detailsLink;
     $i++;
 }
