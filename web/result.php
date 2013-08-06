@@ -23,6 +23,7 @@
         <tbody>
           <?php
             foreach ($routes as $route) {
+			  // Dylan, change this to use $routes['stuff'];
               echo "<tr>";
               echo "<td><b>Route " . $i . "</b></td>";
               echo "<td>" . date ('H:i', strtotime($startTimeFormatted)) . "</td>";
