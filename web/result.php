@@ -22,25 +22,7 @@
         </thead>
         <tbody>
           <?php
-            foreach ($routes->itdRoute as $route) {
-              $i++;
-
-              $prl = $route->itdPartialRouteList;
-              
-              $startTime = $prl->itdPartialRoute->itdPoint->itdDateTime->itdTime;
-              $startHour = $startTime['hour'];
-              $startMinute = $startTime['minute'];
-              
-              $endpr = $prl->itdPartialRoute[count($prl->itdPartialRoute) - 1];
-              $endTime = $endpr->itdPoint[count($endpr->itdPoint) - 1]->itdDateTime->itdTime;
-              $endHour = $endTime['hour'];
-              $endMinute = $endTime['minute'];
-
-              $travelTime = $route['publicDuration'];
-
-              $startTimeFormatted = $startHour . ":" . $startMinute;
-              $endTimeFormatted = $endHour . ":" . $endMinute;
-
+            foreach ($routes as $route) {
               echo "<tr>";
               echo "<td><b>Route " . $i . "</b></td>";
               echo "<td>" . date ('H:i', strtotime($startTimeFormatted)) . "</td>";
