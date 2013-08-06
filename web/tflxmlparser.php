@@ -40,21 +40,36 @@ $xmlroutes = $xml->itdTripRequest->itdItinerary->itdRouteList;
 // iterate through all the routes and print out the start and end times.
 $i = 0;
 
+$meansOfTransportCodes = array(
+	0 => 'National Rail',
+	1 => 'Docklands Light Railway',
+	2 => 'London Underground',
+	3 => 'London Overground',
+	4 => 'Tram',
+	5 => 'London Buses',
+	6 => 'Bus',
+	7 => 'Not Used',
+	8 => 'Emirates Airline',
+	9 => 'London',
+	10 => 'Not Used',
+	11 => 'Replacement Buses')
+
+
 $routes = array();
 foreach ($xmlroutes->itdRoute as $route) {
 	
 	$prl = $route->itdPartialRouteList;
 	
 	$startTime = $prl->itdPartialRoute->itdPoint->itdDateTime->itdTime;
-	$startHour = $startTime['hour']->AsXML();
-	$startMinute = $startTime['minute']->AsXML();
+	$startHour = $startTime['hour'];
+	$startMinute = $startTime['minute'];
 	
 	$endpr = $prl->itdPartialRoute[count($prl->itdPartialRoute) - 1];
 	$endTime = $endpr->itdPoint[count($endpr->itdPoint) - 1]->itdDateTime->itdTime;
-	$endHour = $endTime['hour']->AsXML();
-	$endMinute = $endTime['minute']->AsXML();
+	$endHour = $endTime['hour'];
+	$endMinute = $endTime['minute'];
 	
-	$travelTime = $route['publicDuration']->AsXML();
+	$travelTime = $route['publicDuration'];
 	
 	$detailsLink = $tflurlquery . "&tripSelector" . $i + 1 . "=1&itdLPxx_view=detail";
 	
