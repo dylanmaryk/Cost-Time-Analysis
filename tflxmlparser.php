@@ -1,5 +1,9 @@
 <?php
 
+// report all errors to page
+error_reporting(E_ALL);
+ini_set('display_errors', 'on');
+
 $originpostcode = 'AL2 1AE';
 $destinationpostcode = 'SW1H 0BD';
 $safeorigin = urlencode($originpostcode);
@@ -33,6 +37,11 @@ $routes = $xml->itdTripRequest->itdItinerary->itdRouteList;
 foreach ($routes->itdRoute as $route) {
 	//$starthour = $route->itdPartialRouteList->itdPartialRoute[0]->itdPoint[0]->itdDateTime->itdTime['hour'];
 	//echo $starthour;
+	
+	$partialroute = $route->itdPartialRouteList->itdPartialRoute;
+	echo $partialroute->asXML();
+	echo "<br /><br /><hr /><br /><br />";
+	
 	echo $route->asXML();
 	echo "<br /><br /><hr /><br /><br />";
 }
