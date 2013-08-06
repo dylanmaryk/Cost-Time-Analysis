@@ -18,8 +18,8 @@
           <th><b>Start Time</b></th>
           <th><b>End Time</b></th>
           <th><b>Travel Time</b></th>
-          <th><b>Interchanges</b></th>
           <th></th>
+          <th><b>Interchanges</b></th>
         </thead>
         <tbody>
           <?php
@@ -33,9 +33,9 @@
               <td><?php echo $routeElement['arrival']   ?></td>
               <td><?php echo $routeElement['duration']  ?></td>
               <td><a href="<?php echo $routeElement['detailsLink'] ?>">View Details</a></td>
-              <?php foreach ($routeElement['interchanges'] as $interchange) {
+              <td><?php foreach ($routeElement['interchanges'] as $interchange) {
                 echo $interchange;
-              } ?>
+              } ?></td>
               </tr>
 
               <?php $i++;
