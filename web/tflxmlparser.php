@@ -8,7 +8,7 @@ $destinationpostcode = 'SW1H 0BD';
 $safeorigin = urlencode($originpostcode);
 $safedestination = urlencode($destinationpostcode);
 
-$tflurlquery = 'http://journeyplanner.tfl.gov.uk/user/XML_TRIP_REQUEST2?language=en&place_origin=London&place_destination=London&type_origin=locator&name_origin=';
+$tflurlquery = 'http://journeyplanner.tfl.gov.uk/user/XML_TRIP_REQUEST2?language=en&sessionID=0&place_origin=London&place_destination=London&type_origin=locator&name_origin=';
 $tflurlquery .= $safeorigin;
 $tflurlquery .= '&type_destination=locator&name_destination=';
 $tflurlquery .= $safedestination;
@@ -51,6 +51,8 @@ $i = 0;
           <th></th>
           <th><b>Start Time</b></th>
           <th><b>End Time</b></th>
+          <th><b>Travel Time</b></th>
+          <th></th>
         </thead>
         <tbody>
           <?php
@@ -68,6 +70,8 @@ $i = 0;
               $endHour = $endTime['hour'];
               $endMinute = $endTime['minute'];
 
+              $travelTime = $route['publicDuration'];
+
               $startTimeFormatted = $startHour . ":" . $startMinute;
               $endTimeFormatted = $endHour . ":" . $endMinute;
 
@@ -75,6 +79,8 @@ $i = 0;
               echo "<td><b>Route " . $i . "</b></td>";
               echo "<td>" . date ('H:i', strtotime($startTimeFormatted)) . "</td>";
               echo "<td>" . date ('H:i', strtotime($endTimeFormatted)) . "</td>";
+              echo "<td>" . date ('H:i', strtotime($travelTime)) . "</td>";
+              echo "<td><a href=" .  . ">View Details</a></td>";
               echo "</tr>";
             }
           ?>
