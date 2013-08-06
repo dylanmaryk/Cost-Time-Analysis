@@ -25,15 +25,16 @@
             $i = 1;
 
             foreach ($routes as $routeElement) {
-              echo "<tr>";
-              echo "<td><b>Route " . $i . "</b></td>";
-              echo "<td>" . $routeElement['departure'] . "</td>";
-              echo "<td>" . $routeElement['arrival'] . "</td>";
-              echo "<td>" . $routeElement['duration'] . "</td>";
-              echo "<td><a href=\"" . $routeElement['detailsLink'] . "\">View Details</a></td>";
-              echo "</tr>";
+              ?>
+              <tr>
+              <td><b>Route <?php echo $i ?></b></td>
+              <td> <?php echo $routeElement['departure'] ?></td>
+              <td> <?php echo $routeElement['arrival']   ?></td>
+              <td> <?php echo $routeElement['duration']  ?></td>
+              <td><a href=" <?php echo $routeElement['detailsLink'] ?> ">View Details</a></td>
+              </tr>
 
-              $i++;
+              <?php $i++;
             }
           ?>
         </tbody>
