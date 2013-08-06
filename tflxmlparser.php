@@ -48,11 +48,14 @@ foreach ($routes->itdRoute as $route) {
 	$endHour = $endTime['hour'];
 	$endMinute = $endTime['minute'];
 	
+	$travellTime = $route['publicDuration'];
+	
 	//var_dump($endTime);
 	//echo htmlentities($endTime->asXML());
 	
 	echo "Route " . $i . " start time " . $startHour . ":" . $startMinute
-	. ", end time " . $endHour . ":" . $endMinute;
+	. ", end time " . $endHour . ":" . $endMinute . ", totall travell time "
+	. $travellTime;
 	echo "\n\n\n<br /><br /><hr /><br /><br />\n\n\n";
 }
 
