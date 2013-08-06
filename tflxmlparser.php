@@ -9,7 +9,7 @@ $destinationpostcode = 'SW1H 0BD';
 $safeorigin = urlencode($originpostcode);
 $safedestination = urlencode($destinationpostcode);
 
-$tflurlquery = 'http://journeyplanner.tfl.gov.uk/user/XML_TRIP_REQUEST2?language=en&place_origin=London&place_destination=London&type_origin=locator&name_origin=';
+$tflurlquery = 'http://journeyplanner.tfl.gov.uk/user/XML_TRIP_REQUEST2?language=en&sessionID=0&place_origin=London&place_destination=London&type_origin=locator&name_origin=';
 $tflurlquery .= $safeorigin;
 $tflurlquery .= '&type_destination=locator&name_destination=';
 $tflurlquery .= $safedestination;
@@ -48,14 +48,14 @@ foreach ($routes->itdRoute as $route) {
 	$endHour = $endTime['hour'];
 	$endMinute = $endTime['minute'];
 	
-	$travellTime = $route['publicDuration'];
+	$travelTime = $route['publicDuration'];
 	
 	//var_dump($endTime);
 	//echo htmlentities($endTime->asXML());
 	
 	echo "Route " . $i . " start time " . $startHour . ":" . $startMinute
-	. ", end time " . $endHour . ":" . $endMinute . ", totall travell time "
-	. $travellTime;
+	. ", end time " . $endHour . ":" . $endMinute . ", total travel time "
+	. $travelTime;
 	echo "\n\n\n<br /><br /><hr /><br /><br />\n\n\n";
 }
 
