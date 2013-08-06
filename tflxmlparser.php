@@ -34,16 +34,20 @@ $routes = $xml->itdTripRequest->itdItinerary->itdRouteList;
 //echo $routes->asXML();
 
 // iterate through all the routes and print out the start and end times.
+$i = 0;
 foreach ($routes->itdRoute as $route) {
+	$i++;
 	//$starthour = $route->itdPartialRouteList->itdPartialRoute[0]->itdPoint[0]->itdDateTime->itdTime['hour'];
 	//echo $starthour;
 	
 	//$partialroute = $route->itdPartialRouteList->itdPartialRoute;
 	//$partialroute = $route->xpath('itdPartialRouteList/itdPartialRoute[1]');
 	$time = $route->itdPartialRouteList->itdPartialRoute->itdPoint->itdDateTime->itdTime;
-	var_dump($time);
-	echo "\n\n\n<br /><br /><hr /><br /><br />\n\n\n";
-	echo htmlentities($time[0]->asXML());
+	$hour = $time['hour'];
+	$minute = $time['minute'];
+	//var_dump($time);
+	//echo "\n\n\n<br /><br /><hr /><br /><br />\n\n\n";
+	echo "Route " . $i . " start time " . $hour . ":" . $minute;
 	echo "\n\n\n<br /><br /><hr /><br /><br />\n\n\n";
 	
 	/*
