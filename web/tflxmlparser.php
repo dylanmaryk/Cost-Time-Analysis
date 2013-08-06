@@ -29,14 +29,16 @@ $responsecode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 //echo $xmlstring;
 $xml = simplexml_load_string($xmlstring);
 //var_dump($xml);
-$routes = $xml->itdTripRequest->itdItinerary->itdRouteList;
+$xmlroutes = $xml->itdTripRequest->itdItinerary->itdRouteList;
 //var_dump($routes);
 //echo $routes->asXML();
 
 // iterate through all the routes and print out the start and end times.
 $i = 0;
-foreach ($routes->itdRoute as $route) {
-	$i++;
+
+$routes = array();
+foreach ($xmlroutes->itdRoute as $route) {
+	
 	$prl = $route->itdPartialRouteList;
 	
 	$startTime = $prl->itdPartialRoute->itdPoint->itdDateTime->itdTime;
@@ -52,10 +54,12 @@ foreach ($routes->itdRoute as $route) {
 	
 	$detailsLink = $tflurlquery . "&tripSelector" . $i + 1 . "=1&itdLPxx_view=detail";
 	
-	echo "Route " . $i . " start time " . $startHour . ":" . $startMinute
-	. ", end time " . $endHour . ":" . $endMinute . ", total travel time "
-	. $travelTime;
-	echo "\n\n\n<br /><br /><hr /><br /><br />\n\n\n";
+
+	$routes[$i] = array()
+	$routes[$i]['departure'] = $startHour . ":" . $startMinute;
+	$routes[$i]['arrival'] = $endHour . ":" . $endMinute;
+	$routes[$i]['duration'] = $travelTime;
+        $i++;
 }
 
 ?>
