@@ -27,3 +27,4 @@ departure
 arrival
 duration
 detailsLink
+interchanges

@@ -1,6 +1,6 @@
 <?php
 
-$DEBUG = FALSE;
+$DEBUG = false;
 
 // report all errors to page
 if ($DEBUG) {
@@ -8,8 +8,33 @@ if ($DEBUG) {
 	ini_set('display_errors', 'on');
 }
 
+
 $originpostcode = $_POST['startAddress'];
 $destinationpostcode = $_POST['endAddress'];
+
+$meansOfTransportCodes = array(
+	0 => 'National Rail',
+	1 => 'Docklands Light Railway',
+	2 => 'London Underground',
+	3 => 'London Overground',
+	4 => 'Tram',
+	5 => 'London Buses',
+	6 => 'Bus',
+	7 => 'Not Used',
+	8 => 'Emirates Airline',
+	9 => 'London',
+	10 => 'Not Used',
+	11 => 'Replacement Buses');
+
+$transportNames = array();
+$transportNames['Fussweg'] = 'Walk';
+$transportNames['Bus'] = 'Bus';
+
+$transportImagesDomain = 'http://journeyplanner.tfl.gov.uk';
+$transportImages = array();
+$transportImages['Fussweg'] = '/user/assets/images/icon-walk.gif';
+$transportImages['Bus'] = '/user/assets/images/icon-buses.gif';
+
 $safeorigin = urlencode($originpostcode);
 $safedestination = urlencode($destinationpostcode);
 
@@ -41,22 +66,6 @@ $xmlroutes = $xml->itdTripRequest->itdItinerary->itdRouteList;
 
 // iterate through all the routes and print out the start and end times.
 $i = 0;
-
-$meansOfTransportCodes = array(
-	0 => 'National Rail',
-	1 => 'Docklands Light Railway',
-	2 => 'London Underground',
-	3 => 'London Overground',
-	4 => 'Tram',
-	5 => 'London Buses',
-	6 => 'Bus',
-	7 => 'Not Used',
-	8 => 'Emirates Airline',
-	9 => 'London',
-	10 => 'Not Used',
-	11 => 'Replacement Buses');
-
-
 $routes = array();
 foreach ($xmlroutes->itdRoute as $route) {
 	
@@ -73,6 +82,13 @@ foreach ($xmlroutes->itdRoute as $route) {
 	
 	$travelTime = $route['publicDuration'];
 	
+	$interchanges = array();
+	$j = 0;
+	foreach ($prl->itdPartialRoute as $partialRoute) {
+		$method = $partialRoute->itdMeansOfTransport['productName'];
+		$interchanges[$j] = $method . "";
+		$j++;
+	}
 	
 	$detailsLink = 'http://journeyplanner.tfl.gov.uk/user/XSLT_TRIP_REQUEST2'
 	. $tflurlquery . "&tripSelector" . ($i + 1) . "=1&itdLPxx_view=detail";
@@ -83,6 +99,7 @@ foreach ($xmlroutes->itdRoute as $route) {
 	$routes[$i]['arrival'] = date ('H:i', strtotime($endHour . ":" . $endMinute));
 	$routes[$i]['duration'] = date ('H:i', strtotime($travelTime));
 	$routes[$i]['detailsLink'] = $detailsLink;
+	$routes[$i]['interchanges'] = $interchanges;
     $i++;
 }
 
