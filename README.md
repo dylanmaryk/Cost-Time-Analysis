@@ -21,3 +21,9 @@ You can find the detail vue by adding this to the URI:
 
 note that &tripSelector1 should be added for the 1st route, &tripSelector2 for
 the second, etc. As per Booleans, above.
+
+#Route Array Elements
+departure
+arrival
+duration
+detailsLink
