@@ -8,8 +8,8 @@ if ($DEBUG) {
 	ini_set('display_errors', 'on');
 }
 
-$originpostcode = 'AL2 1AE';
-$destinationpostcode = 'SW1H 0BD';
+$originpostcode = $_POST['startAddress'];
+$destinationpostcode = $_POST['endAddress'];
 $safeorigin = urlencode($originpostcode);
 $safedestination = urlencode($destinationpostcode);
 
