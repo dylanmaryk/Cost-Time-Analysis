@@ -1,6 +1,6 @@
 <?php
 
-$DEBUG = false;
+$DEBUG = FALSE;
 
 // report all errors to page
 if ($DEBUG) {
@@ -13,17 +13,19 @@ $destinationpostcode = 'SW1H 0BD';
 $safeorigin = urlencode($originpostcode);
 $safedestination = urlencode($destinationpostcode);
 
-$tflurlquery = 'http://journeyplanner.tfl.gov.uk/user/XML_TRIP_REQUEST2?language=en&sessionID=0&place_origin=London&place_destination=London&type_origin=locator&name_origin=';
+$tflurlquery = '?language=en&sessionID=0&place_origin=London&place_destination=London&type_origin=locator&name_origin=';
 $tflurlquery .= $safeorigin;
 $tflurlquery .= '&type_destination=locator&name_destination=';
 $tflurlquery .= $safedestination;
 // use if we want to allow future calculations
 //$tflurlquery .= '&itdDate=' .$date. ' &itdTime=' $time;
 
+$xmlquery = 'http://journeyplanner.tfl.gov.uk/user/XML_TRIP_REQUEST2' . $tflurlquery;
+
 $curl = curl_init();
 curl_setopt_array($curl, array(
 	CURLOPT_RETURNTRANSFER => 1,
-	CURLOPT_URL => $tflurlquery,
+	CURLOPT_URL => $xmlquery,
 	CURLOPT_USERAGENT => 'INSERT_DESCRIPTION_OF_SERVICE, INSERT_EMAIL_ADDRESS'
 ));
 
@@ -71,7 +73,9 @@ foreach ($xmlroutes->itdRoute as $route) {
 	
 	$travelTime = $route['publicDuration'];
 	
-	$detailsLink = $tflurlquery . "&tripSelector" . ($i + 1) . "=1&itdLPxx_view=detail";
+	
+	$detailsLink = 'http://journeyplanner.tfl.gov.uk/user/XSLT_TRIP_REQUEST2'
+	. $tflurlquery . "&tripSelector" . ($i + 1) . "=1&itdLPxx_view=detail";
 	
 
 	$routes[$i] = array();
