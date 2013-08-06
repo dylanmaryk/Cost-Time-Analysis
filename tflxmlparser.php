@@ -36,4 +36,5 @@ foreach ($routes->itdRoute as $route) {
 	echo $route->asXML();
 	echo "<br /><br /><hr /><br /><br />";
 }
+
 ?>
