@@ -22,9 +22,14 @@
         </thead>
         <tbody>
           <?php
+<<<<<<< HEAD
             $i = 1;
 
             foreach ($routes as $routeElement) {
+=======
+            foreach ($routes as $route) {
+			  // Dylan, change this to use $routes['stuff'];
+>>>>>>> 285704250df93304904276b5870cc079ea5c1c00
               echo "<tr>";
               echo "<td><b>Route " . $i . "</b></td>";
               echo "<td>" . $routeElement['departure'] . "</td>";
