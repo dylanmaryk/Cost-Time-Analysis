@@ -20,7 +20,7 @@
         <div class="form-group">
           <label for="startAddress" class="col-lg-2 control-label" id="formLabel">Start address</label>
           <div class="col-lg-10">
-            <input type="text" class="col-lg-9 form-control" id="formInput startAddress" name="startAddress">
+            <input type="text" class="col-lg-9 form-control" id="startAddress" name="startAddress">
           </div>
         </div>
         <div class="form-group">
@@ -31,13 +31,18 @@
         </div>
         <div class="form-group">
           <div class="col-offset-2 col-lg-10">
-            <button class="btn btn-primary">Use current location</button>
             <button type="submit" class="btn btn-default">Calculate</button>
+            <a class="btn btn-primary">Use current location</a>
           </div>
         </div>
       </form>
+      <div id="geo" class="geolocation_data"></div>
     </div>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/geo.js"></script>
+    <script type="text/javascript">
+      document.getElementById("startAddress").value = document.getElementById("geo").innerHTML;
+    </script>
   </body>
 </html>
