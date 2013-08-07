@@ -72,7 +72,7 @@ list($lat,$long) = explode(',',htmlentities(htmlspecialchars(strip_tags($_GET['l
 // echo 'Latitude: '.$lat.' Longitude: '.$long.'<br />';
 foreach($geodata as $name => $value){
 	// echo ''.$name.': '.str_replace('&','&amp;',$value).'<br />';
-	echo str_replace('&','&amp;',$value).'<br />';
+	echo str_replace('&','&amp;',$value);
 }
 
 ?>
