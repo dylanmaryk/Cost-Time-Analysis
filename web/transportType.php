@@ -39,4 +39,15 @@ class walk extends transportType
 	}
 }
 
+class tube extends transportType
+{
+	public static $ID = 'Underground';
+	public static $englishName = 'Tube';
+	public static $imgURI = '/user/assets/images/icon-tube.gif';
+	
+	public function price($subTotal, $start, $end) {
+		// tube specific price calcuations.
+	}
+}
+
 ?>
