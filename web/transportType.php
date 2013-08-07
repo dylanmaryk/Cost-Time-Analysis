@@ -19,6 +19,10 @@ abstract class transportType
         	switch ($method) {
         		case 'Bus':
 					return new bus;
+				case 'Fussweg':
+					return new walk;
+				case 'Underground':
+					return new tube;
 				default:
 					return $method;
 					//die 'unkown transport type';	         
