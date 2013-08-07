@@ -6,7 +6,7 @@
 abstract class transportType
 {
 	// ID is the German name found in the productName attribute of
-	//the subroute.
+	// the subroute.
 	public static $ID = '';
 	public static $englishName = '';
 	public static $imgURI = '';
