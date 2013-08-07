@@ -8,11 +8,9 @@ if ($DEBUG) {
 	ini_set('display_errors', 'on');
 }
 
-
 include_once 'transportType.class.php';
 include_once 'route.class.php';
 include_once 'costengine.php';
-include_once 'route.class.php';
 
 $meansOfTransportCodes = array(
 	0 => 'National Rail',
