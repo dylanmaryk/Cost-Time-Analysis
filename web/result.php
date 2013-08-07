@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
   </head>
-  <body>
+  <body style="padding-top: 20px;">
     <div class="container">
-      <h1 align="center">Time/Cost Analysis</h1>
+      <img src="img/logo.png" style="width: 50%; height: 50%; margin-left: auto; margin-right: auto; display: block;" />
       <hr>
       <table class="table">
         <thead>
@@ -18,8 +18,8 @@
           <th><b>Start Time</b></th>
           <th><b>End Time</b></th>
           <th><b>Travel Time</b></th>
-          <th></th>
           <th><b>Interchanges</b></th>
+          <th></th>
         </thead>
         <tbody>
           <?php
@@ -32,12 +32,12 @@
               <td><?php echo $routeElement['departure'] ?></td>
               <td><?php echo $routeElement['arrival']   ?></td>
               <td><?php echo $routeElement['duration']  ?></td>
-              <td><a href="<?php echo $routeElement['detailsLink'] ?>">View Details</a></td>
               <td><?php foreach ($routeElement['interchanges'] as $interchange) {
                 echo '<img src="' . $transportImagesDomain
                 . $transportImages[$interchange] . '" alt="'
                 . $transportNames[$interchange] . '" />';
               } ?></td>
+              <td><a href="<?php echo $routeElement['detailsLink'] ?>">View Details</a></td>
               </tr>
 
               <?php $i++;
