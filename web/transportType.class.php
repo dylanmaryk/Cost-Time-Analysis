@@ -36,7 +36,13 @@ class bus extends transportType
 	public static $imgURI = '/user/assets/images/icon-buses.gif';
 	
 	public function price($subTotal, $start, $end) {
-		// bus specific price calculations
+	    if ($total <= 340) {
+               return 140;
+            } elseif ($total <= 440) {
+               return 440 - $total;
+            } else {
+               return 0;
+            }
 	}
 }
 
