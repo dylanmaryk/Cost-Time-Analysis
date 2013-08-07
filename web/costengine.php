@@ -1,6 +1,5 @@
 <?php
     function costs($route) {
-	$total = 0;
         global $DEBUG;
 	//$processor = array(
 	//'Fussweg' => function() {return 0;},
@@ -8,12 +7,13 @@
 
 	//	 }
 	//);
-	
+	$journeycostobject = array(
+				'traveltypes' => array(),
+				'cost' => 0);
         foreach ($route->interchanges as $transporttype){
-	    $result = $transporttype->price($total);
-            $total += $result;
+	    $journeycostobject = $transporttype->price($journeycostobject);
         }
-	if ($DEBUG) {echo $total;}
-        return $total;
+	if ($DEBUG) {echo $journeycostobject['cost'];}
+        return $journeycostobject['cost'];
     }
 ?>

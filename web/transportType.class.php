@@ -13,7 +13,7 @@ abstract class transportType
 	public static $imgDomain = 'http://journeyplanner.tfl.gov.uk';
 	
 
-	public abstract function price($subTotal);
+	public abstract function price($journeycostobject);
 
     public static function createTransportType($method) {
        	switch ($method) {
@@ -42,14 +42,19 @@ class bus extends transportType
 	public $englishName = 'Bus';
 	public $imgURI = '/user/assets/images/icon-buses.gif';
 	
-	public function price($subTotal) {
-	    if ($subTotal <= 340) {
-               return 140;
-            } elseif ($subTotal <= 440) {
-               return 440 - $subTotal;
+	public function price($journeycostobject) {
+		if (!array_key_exists('Bus',$journeycostobject['traveltypes'])) { $journeycostobject['traveltypes']['Bus'] = 0;}
+		if (count($journeycostobject['traveltypes']) == 1 && array_key_exists('Bus',$journeycostobject['traveltypes'])) {
+	    	if ($journeycostobject['cost'] <= 340) {
+				$journeycostobject['cost'] += 140;   
+            } elseif ($journeycostobject['cost'] <= 440) {
+               $journeycostobject['cost'] += (440 - $journeycostobject['cost']);
             } else {
-               return 0;
-            }
+        	}
+		} else {
+			die ("bus does not know how to handle non bus transport forms");
+		}
+		return $journeycostobject;
 	}
 }
 
@@ -59,8 +64,8 @@ class walk extends transportType
 	public $englishName = 'Walk';
 	public $imgURI = '/user/assets/images/icon-walk.gif';
 	
-	public function price($subTotal) {
-		return 0;
+	public function price($journeycostobject) {
+		return $journeycostobject;
 	}
 }
 
@@ -72,7 +77,8 @@ class tube extends transportType
 	public $start;
 	public $end;
 	
-	public function price($subTotal) {
+	public function price($journeycostobject) {
+		return $journeycostobject;
 		// tube specific price calcuations.
 	}
 }
