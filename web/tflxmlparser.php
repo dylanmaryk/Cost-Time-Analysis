@@ -90,10 +90,13 @@ foreach ($xmlroutes->itdRoute as $route) {
 	$j = 0;
 	foreach ($prl->itdPartialRoute as $partialRoute) {
 		$method = $partialRoute->itdMeansOfTransport['productName'];
+		if ($method == 'Wheelchair Access') continue;
+		
 		if ($method . '' == '') {
 			$method = 'Zug';
 		}
-		echo $method . ', ';
+		
+		if ($DEBUG) echo $method . ', ';
 		$interchanges[$j] = transportType::createTransportType($method . '');
 		$j++;
 	}
@@ -101,20 +104,10 @@ foreach ($xmlroutes->itdRoute as $route) {
 	$detailsLink = 'http://journeyplanner.tfl.gov.uk/user/XSLT_TRIP_REQUEST2'
 	. $tflurlquery . '&tripSelector' . ($i + 1) . '=1&itdLPxx_view=detail';
 	
-	/*
-	$routes[$i] = array();
-	$routes[$i]['departure'] = date ('H:i', strtotime($startHour . ':' . $startMinute));
-	$routes[$i]['arrival'] = date ('H:i', strtotime($endHour . ':' . $endMinute));
-	$routes[$i]['duration'] = date ('H:i', strtotime($travelTime));
-	$routes[$i]['detailsLink'] = $detailsLink;
-	$routes[$i]['interchanges'] = $interchanges;
-	$routes[$i]['cost'] = costs($routes[$i]);
-	 */
 	$departure = date ('H:i', strtotime($startHour . ':' . $startMinute));
 	$arrival = date ('H:i', strtotime($endHour . ':' . $endMinute));
 	$duration  = date ('H:i', strtotime($travelTime));
-
-	 
+	
 	$routes[$i] = new route($departure, $arrival, $duration, $detailsLink, $interchanges);
 	$routes[$i]->cost = costs($routes[$i]); 
     $i++;
