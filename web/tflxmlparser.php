@@ -9,6 +9,8 @@ if ($DEBUG) {
 }
 
 include('transportType.php');
+include 'costengine.php';
+
 $meansOfTransportCodes = array(
 	0 => 'National Rail',
 	1 => 'Docklands Light Railway',
@@ -103,6 +105,7 @@ foreach ($xmlroutes->itdRoute as $route) {
 	$routes[$i]['duration'] = date ('H:i', strtotime($travelTime));
 	$routes[$i]['detailsLink'] = $detailsLink;
 	$routes[$i]['interchanges'] = $interchanges;
+	$routes[$i]['cost'] = costs($routes[$i]);
     $i++;
 }
 
