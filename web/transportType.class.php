@@ -23,9 +23,12 @@ abstract class transportType
 				return new walk;
 			case 'Underground':
 				return new tube;
+			case 'Zug':
+				return new train;
 			default:
-				return $method;
-				//die 'unknown transport type';	         
+				echo('unknown transport type');
+				die('unknown transport type');	  
+				//return $method;       
        	}
 		
 	}
@@ -69,6 +72,32 @@ class tube extends transportType
 	public $ID = 'Underground';
 	public $englishName = 'Tube';
 	public $imgURI = '/user/assets/images/icon-tube.gif';
+	public $start;
+	public $end;
+	
+	public function price($subTotal) {
+		// tube specific price calcuations.
+	}
+}
+
+class train extends transportType
+{
+	public $ID = 'Zug';
+	public $englishName = 'National Rail';
+	public $imgURI = '/user/assets/images/icon-rail.gif';
+	public $start;
+	public $end;
+	
+	public function price($subTotal) {
+		// tube specific price calcuations.
+	}
+}
+
+class dlr extends transportType
+{
+	public $ID = 'Light Railway';
+	public $englishName = 'DLR';
+	public $imgURI = '/user/assets/images/icon-dlr.gif';
 	public $start;
 	public $end;
 	
