@@ -12,6 +12,7 @@ if ($DEBUG) {
 include_once 'transportType.class.php';
 include_once 'route.class.php';
 include_once 'costengine.php';
+include_once 'route.class.php';
 
 $meansOfTransportCodes = array(
 	0 => 'National Rail',
@@ -115,7 +116,7 @@ foreach ($xmlroutes->itdRoute as $route) {
 
 	 
 	$routes[$i] = new route($departure, $arrival, $duration, $detailsLink, $interchanges);
-	 
+	$routes[$i]->cost = costs($routes[$i]); 
     $i++;
 }
 
