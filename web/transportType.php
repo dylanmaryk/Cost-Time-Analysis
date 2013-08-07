@@ -12,8 +12,20 @@ abstract class transportType
 	public static $imgURI = '';
 	public static $imgDomain = 'http://journeyplanner.tfl.gov.uk';
 	
-	public abstract function price($subTotal, $start, $end) {
-		// work out the price of this subRoute
+	public abstract function price($subTotal, $start, $end);
+    public static function createTransportType($method) {
+       	switch ($method) {
+        	case 'Bus':
+				return new bus;
+			case 'Fussweg':
+				return new walk;
+			case 'Underground':
+				return new tube;
+			default:
+				return $method;
+				//die 'unknown transport type';	         
+       	}
+		
 	}
 }
 
