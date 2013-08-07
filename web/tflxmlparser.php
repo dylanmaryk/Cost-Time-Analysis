@@ -87,7 +87,7 @@ foreach ($xmlroutes->itdRoute as $route) {
 	foreach ($prl->itdPartialRoute as $partialRoute) {
 		$method = $partialRoute->itdMeansOfTransport['productName'];
 		if ($method . "" != "") {
-			$interchanges[$j] = $method . "";
+			$interchanges[$j] = transportType::createTransportType($method . "");
 			$j++;
 		}
 	}

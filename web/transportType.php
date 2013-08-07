@@ -14,6 +14,16 @@ abstract class transportType
 	public abstract function price($subTotal, $start, $end) {
 		// work out the price of this subRoute
 	}
+        public static function createTransportType($method) {
+        	switch ($method) {
+        		case 'Bus':
+					return new bus;
+				default:
+					return $method;
+					//die 'unkown transport type';	         
+        	}
+		
+        }
 }
 
 class bus extends transportType
