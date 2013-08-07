@@ -133,6 +133,7 @@ class dlr extends transportType
 	public $end;
 	
 	public function price($subTotal) {
+		return $journeycostobject;
 		// tube specific price calcuations.
 	}
 }
