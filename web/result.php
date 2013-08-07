@@ -4,7 +4,7 @@
   include_once 'route.class.php';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
   <head>
     <title>Time/Cost Analysis</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,11 +13,11 @@
       
     </style>
   </head>
-  <body style="padding-top: 20px;">
-    <div class="container">
-      <img src="img/logo.png" style="width: 50%; height: 50%; margin-left: auto; margin-right: auto; display: block;" />
+  <body style='padding-top: 20px;'>
+    <div class='container'>
+      <img src='img/logo.png' style='width: 50%; height: 50%; margin-left: auto; margin-right: auto; display: block;' />
       <hr>
-      <table class="table">
+      <table class='table'>
         <thead>
           <th></th>
           <th><b>Start</b></th>
@@ -53,7 +53,7 @@
         </tbody>
       </table>
     </div>
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src='http://code.jquery.com/jquery.js'></script>
+    <script src='js/bootstrap.min.js'></script>
   </body>
 </html>

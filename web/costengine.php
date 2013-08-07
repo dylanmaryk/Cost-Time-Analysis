@@ -7,6 +7,7 @@
 
 	//	 }
 	//);
+
 	$journeycostobject = array(
 				'traveltypes' => array(),
 				'cost' => 0);
