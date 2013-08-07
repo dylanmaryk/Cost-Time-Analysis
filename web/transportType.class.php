@@ -15,7 +15,6 @@ abstract class transportType
 
 	public abstract function price($subTotal);
 
-
     public static function createTransportType($method) {
        	switch ($method) {
         	case 'Bus':
