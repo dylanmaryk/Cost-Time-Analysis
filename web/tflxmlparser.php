@@ -1,6 +1,6 @@
 <?php
 
-$DEBUG = FALSE;
+$DEBUG = TRUE;
 
 // report all errors to page
 if ($DEBUG) {
@@ -8,6 +8,7 @@ if ($DEBUG) {
 	ini_set('display_errors', 'on');
 }
 
+include('transportType.php');
 $meansOfTransportCodes = array(
 	0 => 'National Rail',
 	1 => 'Docklands Light Railway',
