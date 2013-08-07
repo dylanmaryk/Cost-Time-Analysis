@@ -94,7 +94,7 @@ foreach ($xmlroutes->itdRoute as $route) {
 			$method = 'Zug';
 		}
 		echo $method . ', ';
-		$interchanges[$j] = transportType::createTransportType($method . '');
+		$interchanges[$j] = transportType::createTransportType($method . '',$startHour,$startMinute);
 		$j++;
 	}
 	

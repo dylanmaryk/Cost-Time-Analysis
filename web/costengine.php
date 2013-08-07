@@ -10,7 +10,8 @@
 
 	$journeycostobject = array(
 				'traveltypes' => array(),
-				'cost' => 0);
+				'cost' => 0,
+				'peak' => false);
         foreach ($route->interchanges as $transporttype){
 	    $journeycostobject = $transporttype->price($journeycostobject);
         }

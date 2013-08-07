@@ -15,10 +15,10 @@ abstract class transportType
 
 	public abstract function price($journeycostobject);
 
-    public static function createTransportType($method) {
+    public static function createTransportType($method,$startHour,$startMinute) {
        	switch ($method) {
         	case 'Bus':
-				return new bus;
+				return new bus($startHour,$startMinute);
 			case 'Fussweg':
 				return new walk;
 			case 'Underground':
@@ -45,8 +45,23 @@ class bus extends transportType
 	public $englishName = 'Bus';
 	public $imgURI = '/user/assets/images/icon-buses.gif';
 	
+	public $startHour;
+	public $startMinute;
+
+	public function bus($Hour,$Minute) {
+		$startHour = $Hour + 0;
+		$startMinute = $Minute + 0;
+	}
+
 	public function price($journeycostobject) {
 		if (!array_key_exists('Bus',$journeycostobject['traveltypes'])) { $journeycostobject['traveltypes']['Bus'] = 0;}
+		if (!$journeycostobject['peak']) {
+			if (($startHour > 4 && $startHour < 9) 
+				||($startHour == 4 && $startMinute >= 30)
+				||($startHour == 9 && $startMinute <= 29)) {
+				$journeycostobject['peak'] = true;
+			}
+		}
 		if (count($journeycostobject['traveltypes']) == 1 && array_key_exists('Bus',$journeycostobject['traveltypes'])) {
 	    	if ($journeycostobject['cost'] <= 340) {
 				$journeycostobject['cost'] += 140;   
