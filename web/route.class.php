@@ -10,13 +10,12 @@ class route
 	                      // transportType objects.
 	public $cost;
 	
-	public function route($de, $ar, $du, $li, $in, $co) {
+	public function route($de, $ar, $du, $li, $in) {
 		$this->departure = $de;
 		$this->arrival = $ar;
 		$this->duration = $du;
 		$this->detailsLink = $li;
 		$this->interchanges = $in;
-		$this->cost = $co;
 	}
 }
 

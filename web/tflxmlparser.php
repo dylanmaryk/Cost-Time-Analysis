@@ -116,7 +116,7 @@ foreach ($xmlroutes->itdRoute as $route) {
 
 	 
 	$routes[$i] = new route($departure, $arrival, $duration, $detailsLink, $interchanges);
-	 
+	$routes[$i]->cost = costs($routes[$i]); 
     $i++;
 }
 
