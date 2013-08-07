@@ -90,9 +90,10 @@ foreach ($xmlroutes->itdRoute as $route) {
 	$j = 0;
 	foreach ($prl->itdPartialRoute as $partialRoute) {
 		$method = $partialRoute->itdMeansOfTransport['productName'];
-		if ($method . '' != '') {
+		if ($method . '' == '') {
 			$method = 'Zug';
 		}
+		echo $method . ', ';
 		$interchanges[$j] = transportType::createTransportType($method . '');
 		$j++;
 	}

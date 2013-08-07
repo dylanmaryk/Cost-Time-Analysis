@@ -27,7 +27,7 @@ abstract class transportType
 				return new train;
 			default:
 				echo('unknown transport type');
-				//die('unknown transport type');	  
+				die('unknown transport type');	  
 				//return $method;       
        	}
 		

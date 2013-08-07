@@ -7,8 +7,16 @@
 <html lang='en'>
   <head>
     <title>Time/Cost Analysis</title>
+<<<<<<< HEAD
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <link href='css/bootstrap.min.css' rel='stylesheet' media='screen'>
+=======
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style type="text/css">
+      
+    </style>
+>>>>>>> master
   </head>
   <body style='padding-top: 20px;'>
     <div class='container'>
@@ -16,11 +24,12 @@
       <hr>
       <table class='table'>
         <thead>
-          <th><b>Route</b></th>
+          <th></th>
           <th><b>Start</b></th>
           <th><b>End</b></th>
           <th><b>Duration</b></th>
-          <th><b>Interchanges</b></th>
+          <th><b>Changes</b></th>
+          <th><b>Cost</b></th>
           <th></th>
         </thead>
         <tbody>
@@ -35,11 +44,12 @@
               <td><?php echo $routeElement->arrival   ?></td>
               <td><?php echo $routeElement->duration  ?></td>
               <td><?php foreach ($routeElement->interchanges as $interchange) {
-                echo '<img src='' . transportType::$imgDomain
-                . $interchange->imgURI . '' alt=''
-                . $interchange->englishName . '' />';
+                echo '<img style="display: block;" src="' . transportType::$imgDomain
+                . $interchange->imgURI . '" alt="'
+                . $interchange->englishName . '" />';
               } ?></td>
-              <td><a href='<?php echo $routeElement->detailsLink ?>'>Details</a></td>
+              <td>&pound;<?php printf("%01.2f", $routeElement->cost/100)?></td>
+              <td><a href="<?php echo $routeElement->detailsLink ?>">Details</a></td>
               </tr>
 
               <?php $i++;

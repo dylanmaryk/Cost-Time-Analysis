@@ -13,6 +13,7 @@
 	    	$result = $transportType->price($total);
             $total += $result;
         }
+	if ($DEBUG) {echo $total;}
         return $total;
     }
 ?>
