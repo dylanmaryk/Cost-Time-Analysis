@@ -7,9 +7,9 @@ abstract class transportType
 {
 	// ID is the German name found in the productName attribute of
 	// the subroute.
-	public static $ID = '';
-	public static $englishName = '';
-	public static $imgURI = '';
+	public $ID = '';
+	public $englishName = '';
+	public $imgURI = '';
 	public static $imgDomain = 'http://journeyplanner.tfl.gov.uk';
 	
 
@@ -38,9 +38,9 @@ abstract class transportType
 
 class bus extends transportType
 {
-	public static $ID = 'Bus';
-	public static $englishName = 'Bus';
-	public static $imgURI = '/user/assets/images/icon-buses.gif';
+	public $ID = 'Bus';
+	public $englishName = 'Bus';
+	public $imgURI = '/user/assets/images/icon-buses.gif';
 	
 	public function price($subTotal) {
 	    if ($subTotal <= 340) {
@@ -55,9 +55,9 @@ class bus extends transportType
 
 class walk extends transportType
 {
-	public static $ID = 'Fussweg';
-	public static $englishName = 'Walk';
-	public static $imgURI = '/user/assets/images/icon-walk.gif';
+	public $ID = 'Fussweg';
+	public $englishName = 'Walk';
+	public $imgURI = '/user/assets/images/icon-walk.gif';
 	
 	public function price($subTotal) {
 		return 0;
@@ -66,9 +66,9 @@ class walk extends transportType
 
 class tube extends transportType
 {
-	public static $ID = 'Underground';
-	public static $englishName = 'Tube';
-	public static $imgURI = '/user/assets/images/icon-tube.gif';
+	public $ID = 'Underground';
+	public $englishName = 'Tube';
+	public $imgURI = '/user/assets/images/icon-tube.gif';
 	public $start;
 	public $end;
 	

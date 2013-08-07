@@ -36,10 +36,10 @@
               <td><?php echo $routeElement->duration  ?></td>
               <td><?php foreach ($routeElement->interchanges as $interchange) {
                 echo '<img src="' . transportType::$imgDomain
-                . $interchange->getimgURI() . '" alt="'
-                . $interchange->getenglishName() . '" />';
+                . $interchange->imgURI . '" alt="'
+                . $interchange->englishName . '" />';
               } ?></td>
-              <td><a href="<?php echo $routeElement['detailsLink'] ?>">Details</a></td>
+              <td><a href="<?php echo $routeElement->detailsLink ?>">Details</a></td>
               </tr>
 
               <?php $i++;
