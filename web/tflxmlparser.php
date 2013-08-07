@@ -9,8 +9,7 @@ if ($DEBUG) {
 }
 
 
-$originpostcode = $_POST['startAddress'];
-$destinationpostcode = $_POST['endAddress'];
+
 
 include_once 'transportType.class.php';
 include_once 'route.class.php';
