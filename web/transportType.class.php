@@ -93,4 +93,19 @@ class train extends transportType
 	}
 }
 
+class dlr extends transportType
+{
+	public $ID = 'Light Railway';
+	public $englishName = 'DLR';
+	public $imgURI = '/user/assets/images/icon-dlr.gif';
+	public $start;
+	public $end;
+	
+	public function price($subTotal) {
+		// tube specific price calcuations.
+	}
+}
+
+
+
 ?>
