@@ -95,14 +95,9 @@ foreach ($xmlroutes->itdRoute as $route) {
 		if ($method . '' == '') {
 			$method = 'Zug';
 		}
-<<<<<<< Updated upstream
 		
 		if ($DEBUG) echo $method . ', ';
-		$interchanges[$j] = transportType::createTransportType($method . '');
-=======
-		echo $method . ', ';
 		$interchanges[$j] = transportType::createTransportType($method . '',$startHour,$startMinute,,);
->>>>>>> Stashed changes
 		$j++;
 	}
 	
