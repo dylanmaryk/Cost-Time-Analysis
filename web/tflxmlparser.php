@@ -100,7 +100,7 @@ foreach ($xmlroutes->itdRoute as $route) {
 	$detailsLink = 'http://journeyplanner.tfl.gov.uk/user/XSLT_TRIP_REQUEST2'
 	. $tflurlquery . "&tripSelector" . ($i + 1) . "=1&itdLPxx_view=detail";
 	
-	
+	/*
 	$routes[$i] = array();
 	$routes[$i]['departure'] = date ('H:i', strtotime($startHour . ":" . $startMinute));
 	$routes[$i]['arrival'] = date ('H:i', strtotime($endHour . ":" . $endMinute));
@@ -108,14 +108,11 @@ foreach ($xmlroutes->itdRoute as $route) {
 	$routes[$i]['detailsLink'] = $detailsLink;
 	$routes[$i]['interchanges'] = $interchanges;
 	$routes[$i]['cost'] = costs($routes[$i]);
-<<<<<<< HEAD
-	
-=======
 	 */
 	$departure = date ('H:i', strtotime($startHour . ":" . $startMinute));
 	$arrival = date ('H:i', strtotime($endHour . ":" . $endMinute));
 	$duration  = date ('H:i', strtotime($travelTime));
->>>>>>> c3e17fa794e8e9cbf609060fc329ed73261d3ee4
+
 	 
 	$routes[$i] = new route($departure, $arrival, $duration, $detailsLink, $interchanges);
 	 
