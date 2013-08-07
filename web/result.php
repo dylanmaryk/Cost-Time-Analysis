@@ -1,5 +1,7 @@
 <?php
-  include "tflxmlparser.php";
+  include_once 'tflxmlparser.php';
+  include_once 'transportType.class.php';
+  include_once 'route.class.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,19 +9,23 @@
     <title>Time/Cost Analysis</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style type="text/css">
+      
+    </style>
   </head>
-  <body>
+  <body style="padding-top: 20px;">
     <div class="container">
-      <h1 align="center">Time/Cost Analysis</h1>
+      <img src="img/logo.png" style="width: 50%; height: 50%; margin-left: auto; margin-right: auto; display: block;" />
       <hr>
       <table class="table">
         <thead>
           <th></th>
-          <th><b>Start Time</b></th>
-          <th><b>End Time</b></th>
-          <th><b>Travel Time</b></th>
+          <th><b>Start</b></th>
+          <th><b>End</b></th>
+          <th><b>Duration</b></th>
+          <th><b>Changes</b></th>
+          <th><b>Cost</b></th>
           <th></th>
-          <th><b>Interchanges</b></th>
         </thead>
         <tbody>
           <?php
@@ -28,14 +34,17 @@
             foreach ($routes as $routeElement) {
               ?>
               <tr>
-              <td><b>Route <?php echo $i ?></b></td>
-              <td><?php echo $routeElement['departure'] ?></td>
-              <td><?php echo $routeElement['arrival']   ?></td>
-              <td><?php echo $routeElement['duration']  ?></td>
-              <td><a href="<?php echo $routeElement['detailsLink'] ?>">View Details</a></td>
-              <td><?php foreach ($routeElement['interchanges'] as $interchange) {
-                echo $interchange;
+              <td><b><?php echo $i ?></b></td>
+              <td><?php echo $routeElement->departure ?></td>
+              <td><?php echo $routeElement->arrival   ?></td>
+              <td><?php echo $routeElement->duration  ?></td>
+              <td><?php foreach ($routeElement->interchanges as $interchange) {
+                echo '<img style="display: block;" src="' . transportType::$imgDomain
+                . $interchange->imgURI . '" alt="'
+                . $interchange->englishName . '" />';
               } ?></td>
+              <td>&pound;<?php printf("%01.2f", $routeElement->cost/100)?></td>
+              <td><a href="<?php echo $routeElement->detailsLink ?>">Details</a></td>
               </tr>
 
               <?php $i++;

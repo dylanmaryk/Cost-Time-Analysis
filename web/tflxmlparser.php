@@ -12,6 +12,11 @@ if ($DEBUG) {
 $originpostcode = $_POST['startAddress'];
 $destinationpostcode = $_POST['endAddress'];
 
+include_once 'transportType.class.php';
+include_once 'route.class.php';
+include_once 'costengine.php';
+
+
 $meansOfTransportCodes = array(
 	0 => 'National Rail',
 	1 => 'Docklands Light Railway',
@@ -29,11 +34,13 @@ $meansOfTransportCodes = array(
 $transportNames = array();
 $transportNames['Fussweg'] = 'Walk';
 $transportNames['Bus'] = 'Bus';
+$transportNames['Underground'] = 'Tube';
 
 $transportImagesDomain = 'http://journeyplanner.tfl.gov.uk';
 $transportImages = array();
 $transportImages['Fussweg'] = '/user/assets/images/icon-walk.gif';
 $transportImages['Bus'] = '/user/assets/images/icon-buses.gif';
+$transportImages['Underground'] = '/user/assets/images/icon-tube.gif';
 
 $safeorigin = urlencode($originpostcode);
 $safedestination = urlencode($destinationpostcode);
@@ -86,20 +93,31 @@ foreach ($xmlroutes->itdRoute as $route) {
 	$j = 0;
 	foreach ($prl->itdPartialRoute as $partialRoute) {
 		$method = $partialRoute->itdMeansOfTransport['productName'];
-		$interchanges[$j] = $method . "";
-		$j++;
+		if ($method . "" != "") {
+			$interchanges[$j] = transportType::createTransportType($method . "");
+			$j++;
+		}
 	}
 	
 	$detailsLink = 'http://journeyplanner.tfl.gov.uk/user/XSLT_TRIP_REQUEST2'
 	. $tflurlquery . "&tripSelector" . ($i + 1) . "=1&itdLPxx_view=detail";
 	
-
+	/*
 	$routes[$i] = array();
 	$routes[$i]['departure'] = date ('H:i', strtotime($startHour . ":" . $startMinute));
 	$routes[$i]['arrival'] = date ('H:i', strtotime($endHour . ":" . $endMinute));
 	$routes[$i]['duration'] = date ('H:i', strtotime($travelTime));
 	$routes[$i]['detailsLink'] = $detailsLink;
 	$routes[$i]['interchanges'] = $interchanges;
+	$routes[$i]['cost'] = costs($routes[$i]);
+	 */
+	$departure = date ('H:i', strtotime($startHour . ":" . $startMinute));
+	$arrival = date ('H:i', strtotime($endHour . ":" . $endMinute));
+	$duration  = date ('H:i', strtotime($travelTime));
+
+	 
+	$routes[$i] = new route($departure, $arrival, $duration, $detailsLink, $interchanges);
+	$routes[$i]->cost = costs($routes[$i]); 
     $i++;
 }
 
