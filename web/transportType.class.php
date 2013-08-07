@@ -13,6 +13,7 @@ abstract class transportType
 	public static $imgDomain = 'http://journeyplanner.tfl.gov.uk';
 	
 	public abstract function price($subTotal);
+	
     public static function createTransportType($method) {
        	switch ($method) {
         	case 'Bus':

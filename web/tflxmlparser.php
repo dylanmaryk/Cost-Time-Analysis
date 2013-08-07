@@ -8,8 +8,8 @@ if ($DEBUG) {
 	ini_set('display_errors', 'on');
 }
 
-include('transportType.php');
-include 'costengine.php';
+include_once 'transportType.php';
+include_once 'costengine.php';
 
 $meansOfTransportCodes = array(
 	0 => 'National Rail',
@@ -107,8 +107,11 @@ foreach ($xmlroutes->itdRoute as $route) {
 	$routes[$i]['interchanges'] = $interchanges;
 	$routes[$i]['cost'] = costs($routes[$i]);
 	 */
+	$departure = date ('H:i', strtotime($startHour . ":" . $startMinute));
+	$arrival = date ('H:i', strtotime($endHour . ":" . $endMinute));
+	$duration  = date ('H:i', strtotime($travelTime));
 	 
-	//$routes[$i] = new 
+	$routes[$i] = new route($departure, $arrival, $duration, $detailsLink, $interchanges);
 	 
     $i++;
 }
