@@ -106,6 +106,4 @@ class dlr extends transportType
 	}
 }
 
-
-
 ?>
