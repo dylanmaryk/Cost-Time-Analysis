@@ -15,14 +15,14 @@ abstract class transportType
 
 	public abstract function price($journeycostobject);
 
-    public static function createTransportType($method,$startHour,$startMinute) {
+    	public static function createTransportType($method,$startHour,$startMinute,$start,$end) {
        	switch ($method) {
         	case 'Bus':
 				return new bus($startHour,$startMinute);
 			case 'Fussweg':
 				return new walk;
 			case 'Underground':
-				return new tube;
+				return new tube($start,$end,$startHour,$startMinute);
 			case 'Zug':
 				return new train;
 			default:
@@ -94,6 +94,15 @@ class tube extends transportType
 	public $imgURI = '/user/assets/images/icon-tube.gif';
 	public $start;
 	public $end;
+	public $startHour;
+	public $startMinute;
+
+	public function tube($startloc,$endloc,$Hour,$Minute){
+		$start = $startloc;
+		$end = $endloc;
+		$startHour = $Hour;
+		$startMinute = $Minute;
+	}
 	
 	public function price($journeycostobject) {
 		return $journeycostobject;
