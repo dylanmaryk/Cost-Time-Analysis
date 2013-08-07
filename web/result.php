@@ -1,5 +1,6 @@
 <?php
   include "tflxmlparser.php";
+  include_once "transportType.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,9 +34,9 @@
               <td><?php echo $routeElement['arrival']   ?></td>
               <td><?php echo $routeElement['duration']  ?></td>
               <td><?php foreach ($routeElement['interchanges'] as $interchange) {
-                echo '<img src="' . $transportImagesDomain
-                . $transportImages[$interchange] . '" alt="'
-                . $transportNames[$interchange] . '" />';
+                echo '<img src="' . transportType::$imgDomain
+                . $interchange->getimgURI() . '" alt="'
+                . $interchange->getenglishName() . '" />';
               } ?></td>
               <td><a href="<?php echo $routeElement['detailsLink'] ?>">Details</a></td>
               </tr>
