@@ -40,7 +40,7 @@
                 . $interchange->imgURI . '" alt="'
                 . $interchange->englishName . '" />';
               } ?></td>
-              <td>&pound;0.00</td>
+              <td>&pound;<?php printf("%01.2f", $routeElement->cost/100)?></td>
               <td><a href="<?php echo $routeElement->detailsLink ?>">Details</a></td>
               </tr>
 
