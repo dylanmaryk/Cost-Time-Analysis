@@ -1,3 +1,6 @@
+#Price calculator!!!
+http://www.tfl.gov.uk/tfl/tickets/faresandtickets/farefinder/current/
+
 #booleans
 
 tfl has an unusual method of indicating true and false in attrbutes. The xml uses 
