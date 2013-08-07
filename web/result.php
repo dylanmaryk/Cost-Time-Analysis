@@ -14,10 +14,10 @@
       <hr>
       <table class="table">
         <thead>
-          <th></th>
-          <th><b>Start Time</b></th>
-          <th><b>End Time</b></th>
-          <th><b>Travel Time</b></th>
+          <th><b>Route</b></th>
+          <th><b>Start</b></th>
+          <th><b>End</b></th>
+          <th><b>Duration</b></th>
           <th><b>Interchanges</b></th>
           <th></th>
         </thead>
@@ -28,7 +28,7 @@
             foreach ($routes as $routeElement) {
               ?>
               <tr>
-              <td><b>Route <?php echo $i ?></b></td>
+              <td><b><?php echo $i ?></b></td>
               <td><?php echo $routeElement['departure'] ?></td>
               <td><?php echo $routeElement['arrival']   ?></td>
               <td><?php echo $routeElement['duration']  ?></td>
@@ -37,7 +37,7 @@
                 . $transportImages[$interchange] . '" alt="'
                 . $transportNames[$interchange] . '" />';
               } ?></td>
-              <td><a href="<?php echo $routeElement['detailsLink'] ?>">View Details</a></td>
+              <td><a href="<?php echo $routeElement['detailsLink'] ?>">Details</a></td>
               </tr>
 
               <?php $i++;
