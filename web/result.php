@@ -21,6 +21,7 @@
           <th><b>End</b></th>
           <th><b>Duration</b></th>
           <th><b>Interchanges</b></th>
+          <th><b>Cost</b></th>
           <th></th>
         </thead>
         <tbody>
@@ -39,6 +40,7 @@
                 . $interchange->imgURI . '" alt="'
                 . $interchange->englishName . '" />';
               } ?></td>
+              <td>&pound;0.00</td>
               <td><a href="<?php echo $routeElement->detailsLink ?>">Details</a></td>
               </tr>
 
