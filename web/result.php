@@ -1,6 +1,7 @@
 <?php
-  include "tflxmlparser.php";
-  include_once "transportType.class.php";
+  include_once 'tflxmlparser.php';
+  include_once 'transportType.class.php';
+  include_once 'route.class.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,10 +31,10 @@
               ?>
               <tr>
               <td><b><?php echo $i ?></b></td>
-              <td><?php echo $routeElement['departure'] ?></td>
-              <td><?php echo $routeElement['arrival']   ?></td>
-              <td><?php echo $routeElement['duration']  ?></td>
-              <td><?php foreach ($routeElement['interchanges'] as $interchange) {
+              <td><?php echo $routeElement->departure ?></td>
+              <td><?php echo $routeElement->arrival   ?></td>
+              <td><?php echo $routeElement->duration  ?></td>
+              <td><?php foreach ($routeElement->interchanges as $interchange) {
                 echo '<img src="' . transportType::$imgDomain
                 . $interchange->getimgURI() . '" alt="'
                 . $interchange->getenglishName() . '" />';
