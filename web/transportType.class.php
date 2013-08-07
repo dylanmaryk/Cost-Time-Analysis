@@ -12,7 +12,9 @@ abstract class transportType
 	public static $imgURI = '';
 	public static $imgDomain = 'http://journeyplanner.tfl.gov.uk';
 	
-	public abstract function price($subTotal, $start, $end);
+
+	public abstract function price($subTotal);
+
 
     public static function createTransportType($method) {
        	switch ($method) {
@@ -41,11 +43,11 @@ class bus extends transportType
 	public static $englishName = 'Bus';
 	public static $imgURI = '/user/assets/images/icon-buses.gif';
 	
-	public function price($subTotal, $start, $end) {
-	    if ($total <= 340) {
+	public function price($subTotal) {
+	    if ($subTotal <= 340) {
                return 140;
-            } elseif ($total <= 440) {
-               return 440 - $total;
+            } elseif ($subTotal <= 440) {
+               return 440 - $subTotal;
             } else {
                return 0;
             }
@@ -58,7 +60,7 @@ class walk extends transportType
 	public static $englishName = 'Walk';
 	public static $imgURI = '/user/assets/images/icon-walk.gif';
 	
-	public function price($subTotal, $start, $end) {
+	public function price($subTotal) {
 		return 0;
 	}
 }
@@ -68,8 +70,10 @@ class tube extends transportType
 	public static $ID = 'Underground';
 	public static $englishName = 'Tube';
 	public static $imgURI = '/user/assets/images/icon-tube.gif';
+	public $start;
+	public $end;
 	
-	public function price($subTotal, $start, $end) {
+	public function price($subTotal) {
 		// tube specific price calcuations.
 	}
 }

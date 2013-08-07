@@ -1,6 +1,6 @@
 <?php
   include "tflxmlparser.php";
-  include_once "transportType.php";
+  include_once "transportType.class.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
