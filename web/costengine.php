@@ -9,8 +9,8 @@
 	//	 }
 	//);
 	
-        foreach ($route->interchanges as $transporttype){
-	    $result = $transporttype->price($total);
+        foreach ($route->interchanges as $transportType) {
+	    	$result = $transportType->price($total);
             $total += $result;
         }
         return $total;
