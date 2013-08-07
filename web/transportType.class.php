@@ -25,6 +25,8 @@ abstract class transportType
 				return new tube;
 			case 'Zug':
 				return new train;
+			case 'Light Railway':
+				return new dlr;
 			default:
 				echo('unknown transport type');
 				die('unknown transport type');	  
