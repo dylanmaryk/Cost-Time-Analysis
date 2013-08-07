@@ -50,7 +50,7 @@ $tflurlquery .= $safedestination;
 //$tflurlquery .= '&itdDate=' .$date. ' &itdTime=' $time;
 
 $xmlquery = 'http://journeyplanner.tfl.gov.uk/user/XML_TRIP_REQUEST2' . $tflurlquery;
-
+if ($DEBUG){echo $xmlquery;}
 $curl = curl_init();
 curl_setopt_array($curl, array(
 	CURLOPT_RETURNTRANSFER => 1,
@@ -95,9 +95,14 @@ foreach ($xmlroutes->itdRoute as $route) {
 		if ($method . '' == '') {
 			$method = 'Zug';
 		}
+<<<<<<< Updated upstream
 		
 		if ($DEBUG) echo $method . ', ';
 		$interchanges[$j] = transportType::createTransportType($method . '');
+=======
+		echo $method . ', ';
+		$interchanges[$j] = transportType::createTransportType($method . '',$startHour,$startMinute,,);
+>>>>>>> Stashed changes
 		$j++;
 	}
 	

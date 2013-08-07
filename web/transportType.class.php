@@ -15,14 +15,18 @@ abstract class transportType
 
 	public abstract function price($subTotal);
 
+<<<<<<< Updated upstream
     public static function createTransportType($method) {
+=======
+    public static function createTransportType($method,$startHour,$startMinute,$startloc,$endloc) {
+>>>>>>> Stashed changes
        	switch ($method) {
         	case 'Bus':
 				return new bus;
 			case 'Fussweg':
 				return new walk;
 			case 'Underground':
-				return new tube;
+				return new tube($startloc,$endloc,$startHour,$startMinute);
 			case 'Zug':
 				return new train;
 			default:
@@ -72,10 +76,19 @@ class tube extends transportType
 	public $ID = 'Underground';
 	public $englishName = 'Tube';
 	public $imgURI = '/user/assets/images/icon-tube.gif';
-	public $start;
-	public $end;
 	
+<<<<<<< Updated upstream
 	public function price($subTotal) {
+=======
+	public $startzone;
+	public $endzone;
+	
+	public tube($startloc,$endloc,$Hour,$Minute){
+	}
+
+	public function price($journeycostobject) {
+		return $journeycostobject;
+>>>>>>> Stashed changes
 		// tube specific price calcuations.
 	}
 }
