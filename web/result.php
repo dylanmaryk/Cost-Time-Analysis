@@ -33,8 +33,8 @@
   <body style='padding-top: 20px;'>
     <div class='container'>
       <img src='img/logo.png' style='width: 50%; height: 50%; margin-left: auto; margin-right: auto; display: block;' />
-      <hr />
-      <?php if($showResults) { ?>
+      <hr>
+      <?php if($showResults && !$invalidPostcode) { ?>
         <table class='table' style='width: 360px; margin: auto;'>
           <thead>
             <th></th>
@@ -75,6 +75,9 @@
             ?>
           </tbody>
         </table>
+      <?php } ?>
+      <?php if($invalidPostcode) { ?>
+        <h3> Invalid Postcode </h3>
       <?php } ?>
       <form class="form-horizontal" action="result.php" method="post">
         <input type="hidden" name="request" value="results" />

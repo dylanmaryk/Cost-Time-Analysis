@@ -63,86 +63,99 @@ curl_setopt_array($curl, array(
 $xmlstring = curl_exec($curl);
 //probably should check this
 $responsecode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+if ($responsecode != 200) {
+	die ("bad response");
+}
+
 //echo $xmlstring;
 $xml = simplexml_load_string($xmlstring);
 //var_dump($xml);
-$xmlroutes = $xml->itdTripRequest->itdItinerary->itdRouteList;
-//var_dump($routes);
-//echo $routes->asXML();
-
-// iterate through all the routes and print out the start and end times.
-$i = 0;
-$routes = array();
-foreach ($xmlroutes->itdRoute as $route) {
-	$routesToZones = array();
-	if ($route->itdFare->count() != 0) {
-		foreach ($route->itdFare->itdTariffzones as $routezones) {
-			$j = 0;
-			foreach ($routezones->itdZones as $zone){
-				$zonenum[$j] = ($zone->zoneElem . "") + 0;
-				$j++;
-			}
-			if (count($zonenum) == 1) {$zonenum[1] = $zonenum[0];}
-			$zonePR = $routezones->attributes()->toPR + 0;
-			$routesToZones[$zonePR] = $zonenum;
-		}
+$invalidPostcode = false;
+foreach($xml->itdTripRequest->itdOdv as $location) {
+	if ($location->itdOdvName['state'] == 'list'){
+		$invalidPostcode = true;	
 	}
-	$prl = $route->itdPartialRouteList;
-	
-	$startTime = $prl->itdPartialRoute->itdPoint->itdDateTime->itdTime;
-	$startHour = $startTime['hour'];
-	$startMinute = $startTime['minute'];
-	
-	$endpr = $prl->itdPartialRoute[count($prl->itdPartialRoute) - 1];
-	$endTime = $endpr->itdPoint[count($endpr->itdPoint) - 1]->itdDateTime->itdTime;
-	$endHour = $endTime['hour'];
-	$endMinute = $endTime['minute'];
-	
-	$travelTime = $route['publicDuration'];
-	
-	$interchanges = array();
-	$j = 0;
-	foreach ($prl->itdPartialRoute as $partialRoute) {
-		$method = $partialRoute->itdMeansOfTransport['productName'];
-		if ($method == 'Wheelchair Access') continue;
-		
-		if ($method . '' == '') {
-			$method = 'Zug';
-		}
-		if ($DEBUG){echo $method . ', ';}
-		foreach ($partialRoute->itdPoint as $point) {
-			if ($point->attributes()->usage == 'arrival') {
-				$time = $point->itdDateTime->itdTime;
-				$arrivalStartHour = $time['hour'];
-				$arrivalStartMinute = $time['minute'];
-			} elseif ($point->attributes()->usage == 'departure') {
-			} else {
-				die('unknown point type');
-			}
-		}
-		$arrivalLoc = 0;
-		$destination = 0;
-		if (array_key_exists($j,$routesToZones)) {
-			$arrivalLoc = $routesToZones[$j][0];
-			$destination = $routesToZones[$j][1];
-		}
-		$interchanges[$j] = transportType::createTransportType($method . '',$arrivalStartHour,$arrivalStartMinute,$arrivalLoc,$destination);
-		$j++;
-	}
-	
-	$departure = date ('H:i', strtotime($startHour . ':' . $startMinute));
-	$arrival = date ('H:i', strtotime($endHour . ':' . $endMinute));
-	$duration  = date ('H:i', strtotime($travelTime));
-	
-	$detailsLink = 'http://journeyplanner.tfl.gov.uk/user/XSLT_TRIP_REQUEST2'
-	. $tflurlquery . '=1&itdLPxx_view=detail&calcNumberOfTrips=1&noAlt=1&itdTime='
-	. $departure . '&itdTripDateTimeDepArr=dep';
-	
-	$routes[$i] = new route($departure, $arrival, $duration, $detailsLink, $interchanges);
-	$routes[$i]->cost = costs($routes[$i]); 
-    $i++;
 }
+if (!$invalidPostcode) {
+	$xmlroutes = $xml->itdTripRequest->itdItinerary->itdRouteList;
+	//var_dump($routes);
+	//echo $routes->asXML();
 
-if ($DEBUG) var_dump($routes);
+	// iterate through all the routes and print out the start and end times.
+	$i = 0;
+	$routes = array();
+	var_dump($xmlroutes);
+	foreach ($xmlroutes->itdRoute as $route) {
+		$routesToZones = array();
+		if ($route->itdFare->count() != 0) {
+			foreach ($route->itdFare->itdTariffzones as $routezones) {
+				$j = 0;
+				foreach ($routezones->itdZones as $zone){
+					$zonenum[$j] = ($zone->zoneElem . "") + 0;
+					$j++;
+				}
+				if (count($zonenum) == 1) {$zonenum[1] = $zonenum[0];}
+				$zonePR = $routezones->attributes()->toPR + 0;
+				$routesToZones[$zonePR] = $zonenum;
+			}
+		}
+		$prl = $route->itdPartialRouteList;
+	
+		$startTime = $prl->itdPartialRoute->itdPoint->itdDateTime->itdTime;
+		$startHour = $startTime['hour'];
+		$startMinute = $startTime['minute'];
+	
+		$endpr = $prl->itdPartialRoute[count($prl->itdPartialRoute) - 1];
+		$endTime = $endpr->itdPoint[count($endpr->itdPoint) - 1]->itdDateTime->itdTime;
+		$endHour = $endTime['hour'];
+		$endMinute = $endTime['minute'];
+	
+		$travelTime = $route['publicDuration'];
+	
+		$interchanges = array();
+		$j = 0;
+		foreach ($prl->itdPartialRoute as $partialRoute) {
+			$method = $partialRoute->itdMeansOfTransport['productName'];
+			if ($method == 'Wheelchair Access') continue;
+		
+			if ($method . '' == '') {
+				$method = 'Zug';
+			}
+			if ($DEBUG){echo $method . ', ';}
+			foreach ($partialRoute->itdPoint as $point) {
+				if ($point->attributes()->usage == 'arrival') {
+					$time = $point->itdDateTime->itdTime;
+					$arrivalStartHour = $time['hour'];
+					$arrivalStartMinute = $time['minute'];
+				} elseif ($point->attributes()->usage == 'departure') {
+				} else {
+					die('unknown point type');
+				}
+			}
+			$arrivalLoc = 0;
+			$destination = 0;
+			if (array_key_exists($j,$routesToZones)) {
+				$arrivalLoc = $routesToZones[$j][0];
+				$destination = $routesToZones[$j][1];
+			}
+			$interchanges[$j] = transportType::createTransportType($method . '',$arrivalStartHour,$arrivalStartMinute,$arrivalLoc,$destination);
+			$j++;
+		}
+	
+		$departure = date ('H:i', strtotime($startHour . ':' . $startMinute));
+		$arrival = date ('H:i', strtotime($endHour . ':' . $endMinute));
+		$duration  = date ('H:i', strtotime($travelTime));
+	
+		$detailsLink = 'http://journeyplanner.tfl.gov.uk/user/XSLT_TRIP_REQUEST2'
+		. $tflurlquery . '=1&itdLPxx_view=detail&calcNumberOfTrips=1&noAlt=1&itdTime='
+		. $departure . '&itdTripDateTimeDepArr=dep';
+	
+		$routes[$i] = new route($departure, $arrival, $duration, $detailsLink, $interchanges);
+		$routes[$i]->cost = costs($routes[$i]); 
+	    $i++;
+	}
 
+	if ($DEBUG) var_dump($routes);
+}
 ?>
