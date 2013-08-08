@@ -29,7 +29,7 @@ $meansOfTransportCodes = array(
 $safeorigin = urlencode($originpostcode);
 $safedestination = urlencode($destinationpostcode);
 
-$tflurlquery = '?language=en&sessionID=0&place_origin=London&place_destination=London&type_origin=locator&name_origin=';
+$tflurlquery = '?language=en&sessionID=0&includedMeans=2&includedMeans=5&place_origin=London&place_destination=London&type_origin=locator&name_origin=';
 $tflurlquery .= $safeorigin;
 $tflurlquery .= '&type_destination=locator&name_destination=';
 $tflurlquery .= $safedestination;

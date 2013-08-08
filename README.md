@@ -25,6 +25,10 @@ You can find the detail vue by adding this to the URI:
 note that &tripSelector1 should be added for the 1st route, &tripSelector2 for
 the second, etc. As per Booleans, above.
 
+#Bus and tube only
+Tube: &includedMeans=2
+Bus: &includedMeans=5
+
 #Route Array Elements
 departure
 arrival
