@@ -31,3 +31,7 @@ arrival
 duration
 detailsLink
 interchanges
+
+#Euston - watford junction anamoly
+
+Euston to Watford juction services do not follow normal zoning rules for juorneys starting in euston or watford junction

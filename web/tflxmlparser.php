@@ -74,7 +74,19 @@ $xmlroutes = $xml->itdTripRequest->itdItinerary->itdRouteList;
 $i = 0;
 $routes = array();
 foreach ($xmlroutes->itdRoute as $route) {
-	
+	$routesToZones = array();
+	if ($route->itdFare->count() != 0) {
+		foreach ($route->itdFare->itdTariffzones as $routezones) {
+			$j = 0;
+			foreach ($routezones->itdZones as $zone){
+				$zonenum[$j] = ($zone->zoneElem . "") + 0;
+				$j++;
+			}
+			if (count($zonenum) == 1) {$zonenum[1] = $zonenum[0];}
+			$zonePR = $routezones->attributes()->toPR + 0;
+			$routesToZones[$zonePR] = $zonenum;
+		}
+	}
 	$prl = $route->itdPartialRouteList;
 	
 	$startTime = $prl->itdPartialRoute->itdPoint->itdDateTime->itdTime;
@@ -97,9 +109,24 @@ foreach ($xmlroutes->itdRoute as $route) {
 		if ($method . '' == '') {
 			$method = 'Zug';
 		}
-		
-		if ($DEBUG) echo $method . ', ';
-		$interchanges[$j] = transportType::createTransportType($method . '');
+		if ($DEBUG){echo $method . ', ';}
+		foreach ($partialRoute->itdPoint as $point) {
+			if ($point->attributes()->usage == 'arrival') {
+				$time = $point->itdDateTime->itdTime;
+				$arrivalStartHour = $time['hour'];
+				$arrivalStartMinute = $time['minute'];
+			} elseif ($point->attributes()->usage == 'departure') {
+			} else {
+				die('unknown point type');
+			}
+		}
+		$arrivalLoc = 0;
+		$destination = 0;
+		if (array_key_exists($j,$routesToZones)) {
+			$arrivalLoc = $routesToZones[$j][0];
+			$destination = $routesToZones[$j][1];
+		}
+		$interchanges[$j] = transportType::createTransportType($method . '',$arrivalStartHour,$arrivalStartMinute,$arrivalLoc,$destination);
 		$j++;
 	}
 	
