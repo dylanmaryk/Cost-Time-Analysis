@@ -7,10 +7,10 @@
   $means = array(
     0 => array(
       'id' => 2,
-      'value' => (isset($_POST['busset'])?$_GET['busset']:true)),
+      'value' => (true)),
     1 => array(
       'id' => 5,
-      'value' => (isset($_POST['tubeset'])?$_GET['tubeset']:true)));
+      'value' => (true)));
 
   include "tflxmlparser.php";
 
