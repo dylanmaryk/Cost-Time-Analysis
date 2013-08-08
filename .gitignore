@@ -1,3 +1,4 @@
+*.orig
 *.project
 *.komodoproject
 .DS_Store
