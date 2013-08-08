@@ -1,7 +1,8 @@
 <?php
   $originpostcode = $_GET['startAddress'];
   $destinationpostcode = $_GET['endAddress'];
-
+  $arrdep = $_GET['arrdep'];
+  $tripTime = $_GET['currentTime'];
   include "tflxmlparser.php";
 
   $routesEncode = json_encode($routes);

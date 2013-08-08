@@ -1,5 +1,5 @@
 <?php
-$DEBUG = false;
+$DEBUG = true;
 // report all errors to page
 if ($DEBUG) {
 	error_reporting(E_ALL);
@@ -140,7 +140,7 @@ if (!$invalidPostcode) {
     	$i++;
 	}
 
-	//if ($DEBUG) var_dump($routes);
-	if ($DEBUG) echo $xmlstring;
+	if ($DEBUG) var_dump($routes);
+	//if ($DEBUG) echo $xmlstring;
 }
 ?>
