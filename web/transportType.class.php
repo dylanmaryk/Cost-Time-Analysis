@@ -352,15 +352,14 @@ class tube extends transportType
 	}
 	
 	public function price($journeycostobject) {
-		
+		$cap = $journeycostobject['cap'];
 		if (!$journeycostobject['inzonejourney']) {
 			$journeycostobject['start zone'] = $this->start;
 			$journeycostobject['inzonejourney'] = true;
 		} else {
 			$ispeak = $journeycostobject['peak'];
-			$journeycostobject['cost'] = $journeycostobject['cost'] - 
-				self::$ticketprices[($ispeak?'peak' :'offpeak')][$journeycostobject['start zone']]
-					[$journeycostobject['finish zone']];
+			
+			$journeycostobject['cost'] = $journeycostobject['cost'] -  $journeycostobject['subTotal'];
 		}
 		$ispeak = ($journeycostobject['peak']
 				||($this->startHour > 6 && $this->startHour < 9) 
@@ -372,10 +371,28 @@ class tube extends transportType
 			echo "start zone: " . $journeycostobject['start zone'];
 			echo "end zone: " . $journeycostobject['finish zone'];
 		}
-		$journeycostobject['cost'] = $journeycostobject['cost'] + 
+		if ($cap < self::$ticketprices[($ispeak ? 'peakcaps' :'offpeakcaps')]
+			[$journeycostobject['start zone']]
+			[$journeycostobject['finish zone']])
+			$cap = (self::$ticketprices[($ispeak ? 'peakcaps' :'offpeakcaps')]
+			[$journeycostobject['start zone']]
+			[$journeycostobject['finish zone']]);
+		if ($cap > $journeycostobject['cost'] + 
 			self::$ticketprices[($ispeak ?'peak' :'offpeak')][$journeycostobject['start zone']]
-					[$journeycostobject['finish zone']];
+				[$journeycostobject['finish zone']]) {
+			$subTotal = self::$ticketprices[($ispeak ?'peak' :'offpeak')][$journeycostobject['start zone']]
+				[$journeycostobject['finish zone']];
+			$journeycostobject['cost'] = $journeycostobject['cost'] + $subTotal;
+			$journeycostobject['subTotal'] = $subTotal;
+			
+		} else {
+			$journeycostobject['subTotal'] = $cap - $journeycostobject['cost']; 
+			$journeycostobject['cost'] = $cap;
+			
+		} 
+
 		$journeycostobject['peak'] = $ispeak;
+		$journeycostobject['cap'] = $cap;
 		return $journeycostobject;
 		// tube specific price calcuations.
 	}
