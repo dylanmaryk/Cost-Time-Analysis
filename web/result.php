@@ -6,18 +6,47 @@
   $originpostcode = '';
   $destinationpostcode = '';
   if($showResults) {
-    $means = array(
-	0 => array(
-		'id' => 5,
-		'value' => ($_POST['busset'] == "on" ?true:false)),
-	1 => array(
-		'id' => 2,
-		'value' => ($_POST['tubeset'] == "on" ?true:false)));
-    $arrdep = $_POST['arrdep'];
+	error_reporting(E_ALL);
+	ini_set('display_errors', 'on');
+    $deparr = $_POST['arrdep'];
     $tripTime = $_POST['currentTime'];
     $originpostcode = $_POST['startAddress'];
     $destinationpostcode = $_POST['endAddress'];
+    if((!array_key_exists('busset',$_POST) && !array_key_exists('tubeset',$_POST)) || (array_key_exists('busset',$_POST) && array_key_exists('tubeset',$_POST) && $_POST['busset'] == "on" && $_POST['tubeset'] == "on")){
+      $means = array(
+	0 => array(
+		'id' => 5,
+		'value' => true),
+	1 => array(
+		'id' => 2,
+		'value' => true));
+      include 'tflxmlparser.php';
+      $means = array(
+	0 => array(
+		'id' => 5,
+		'value' => (false)),
+	1 => array(
+		'id' => 2,
+		'value' => (true)));
+      include 'tflxmlparser.php';
+            $means = array(
+	0 => array(
+		'id' => 5,
+		'value' => (true)),
+	1 => array(
+		'id' => 2,
+		'value' => (false)));
+      include 'tflxmlparser.php';
+    } else {
+    $means = array(
+	0 => array(
+		'id' => 5,
+		'value' => (array_key_exists('busset',$_POST) && $_POST['busset'] == "on" ?true:false)),
+	1 => array(
+		'id' => 2,
+		'value' => (array_key_exists('tubeset',$_POST) && $_POST['tubeset'] == "on" ?true:false)));
     include_once 'tflxmlparser.php';
+    }
   }
 ?><!DOCTYPE html>
 <html lang='en'>
@@ -112,7 +141,7 @@
         <div class="form-group">
           <label for="currentTime" class="col-lg-4 control-label" id="formLabel">Start/end time</label>
           <div class="col-lg-3" style="margin-top: 6px;">
-            <select>
+            <select name="arrdep">
               <option value="dep">Leaving</option>
               <option value="arr">Arriving</option>
             </select>

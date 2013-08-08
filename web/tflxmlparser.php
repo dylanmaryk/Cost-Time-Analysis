@@ -33,7 +33,7 @@ $tflurlquery .= $safeorigin;
 $tflurlquery .= '&type_destination=locator&name_destination=';
 $tflurlquery .= $safedestination;
 $tflurlquery .= '&itdTripDateTimeDepArr=';
-$deparr = 'dep';
+//$deparr = 'dep';
 $tflurlquery .= $deparr;
 foreach ($means as $transitem) {
 	if ($transitem['value']) $tflurlquery .= '&includedMeans=' . $transitem['id'];
@@ -71,8 +71,9 @@ if (!$invalidPostcode) {
 	//echo $routes->asXML();
 
 	// iterate through all the routes and print out the start and end times.
-	$i = 0;
-	$routes = array();
+	
+	$routes = isset($routes)?$routes:array();
+	$i = count($routes) - 1;
 	foreach ($xmlroutes->itdRoute as $route) {
 		$routesToZones = array();
 		if ($route->itdFare->count() != 0) {
