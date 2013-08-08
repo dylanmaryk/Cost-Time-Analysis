@@ -29,8 +29,8 @@
         useDefaults = function() {
           start = document.getElementById('startAddress');
           end = document.getElementById('endAddress');
-          start.value = 'SW1H 0BD';
-          end.value = 'SE11 5TN';
+          start.value = 'WD5 0DH';
+          end.value = 'DA5 1AN';
         }
         getPostcode = function() {
           document.getElementById("startAddress").value = document.getElementById("geo").innerHTML;
