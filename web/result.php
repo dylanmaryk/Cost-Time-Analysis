@@ -6,38 +6,36 @@
   $originpostcode = '';
   $destinationpostcode = '';
   if($showResults) {
-    $means = array(
-	0 => array(
-		'id' => 5,
-		'value' => ($_POST['busset'] == "on" ?true:false)),
-	1 => array(
-		'id' => 2,
-		'value' => ($_POST['tubeset'] == "on" ?true:false)));
     $arrdep = $_POST['arrdep'];
     $tripTime = $_POST['currentTime'];
     $originpostcode = $_POST['startAddress'];
     $destinationpostcode = $_POST['endAddress'];
-    include_once 'tflxmlparser.php';
   }
 ?><!DOCTYPE html>
 <html lang='en'>
   <head>
     <title>Time/Cost Analysis</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <link href="css/columnLayout.css" rel="stylesheet" media="screen" />
     <style type="text/css">
       html {
        overflow-y: scroll;
       }
     </style>
     <script type="text/javascript">
-      var useDefaults = function() {}
+      var useDefaults1 = function() {}
+      var useDefaults2 = function() {}
       window.onload = function(e) {
-        useDefaults = function() {
-          start = document.getElementById('startAddress');
-          end = document.getElementById('endAddress');
+        start = document.getElementById('startAddress');
+        end = document.getElementById('endAddress');
+        useDefaults1 = function() {
           start.value = 'WD5 0DH';
           end.value = 'DA5 1AN';
+        }
+        useDefaults2 = function() {
+          start.value = 'W12 7GF';
+          end.value = 'E9 7DE';
         }
         getPostcode = function() {
           document.getElementById("startAddress").value = document.getElementById("geo").innerHTML;
@@ -46,112 +44,76 @@
     </script>
   </head>
   <body style='padding-top: 20px; background-color: #E0E0E0;'>
-    <div class='container' style='width: 360px; margin: auto;'>
-      <img src='img/logo.png' style='width: 100%; margin-left: auto; margin-right: auto; display: block;' />
-      <hr/>
-      <?php if($showResults && !$invalidPostcode) { ?>
-        <table class='table' style='width: 360px; margin: auto;'>
-          <thead>
-            <th></th>
-            <th><b>Start</b></th>
-            <th><b>End</b></th>
-            <th><b>Duration</b></th>
-            <th><b>Cost</b></th>
-            <th></th>
-          </thead>
-          <tbody>
+    <div class='container' style='margin: auto;'>
+      <div id='wrap' style="width: 730px !important;">
+        <div id='header'>
+          <img src='img/logo.png' style='width: 100%; margin-left: auto; margin-right: auto; display: block;' />
+          <hr/>
+        </div>
+        
+        <?php if($showResults && !$invalidPostcode) { ?>
+          <div id="tube">
+            <h4>Tube</h4>
             <?php
-              $i = 1;
-  
-              foreach ($routes as $routeElement) {
-                ?>
-                <tr>
-                  <td><b><?php echo $i ?></b></td>
-                  <td><?php echo $routeElement->departure ?></td>
-                  <td><?php echo $routeElement->arrival   ?></td>
-                  <td><?php echo $routeElement->duration  ?></td>
-                  <td>&pound;<?php printf("%01.2f", $routeElement->cost/100)?></td>
-                  <td><a href="<?php echo $routeElement->detailsLink ?>">Details</a></td>
-                </tr>
-                <tr>
-                  <td colspan="6" style="border-top: none;">
-                    <b>Interchanges:</b>
-                    <div style="float: right;">
-                      <?php foreach ($routeElement->interchanges as $interchange) {
-                        echo '<img src="' . transportType::$imgDomain
-                        . $interchange->imgURI . '" alt="'
-                        . $interchange->englishName . '" />';
-                      } ?>
-                    </div>
-                  </td>
-                </tr>
-                <?php $i++;
-              }
+              $means = 'tube';
+              include 'resultGenerator.php';
             ?>
-          </tbody>
-        </table>
-        <hr style='width: 360px; margin: auto; margin-bottom: 25px' />
-      <?php } ?>
-      <?php if($invalidPostcode) { ?>
-        <h3> Invalid Postcode </h3>
-      <?php } ?>
-      <form style='width: 360px; margin: auto;' class="form-horizontal" action="result.php" method="post">
-        <input type="hidden" name="request" value="results" />
-        <div class="form-group">
-          <label for="startAddress" class="col-lg-4 control-label" id="formLabel">Start address</label>
-          <div class="col-lg-8">
-            <input type="text" class="col-lg-9 form-control" id="startAddress" name="startAddress" value="<?php echo $originpostcode ?>">
           </div>
-        </div>
-        <div class="form-group">
-          <label for="endAddress" class="col-lg-4 control-label" id="formLabel">End address</label>
-          <div class="col-lg-8">
-            <input type="text" class="form-control" id="endAddress" name="endAddress" value="<?php echo $destinationpostcode ?>">
+          
+          <div id="bus">
+            <h4>Bus</h4>
+            <?php
+              $means = 'bus';
+              include 'resultGenerator.php';
+            ?>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="currentTime" class="col-lg-4 control-label" id="formLabel">Start/end time</label>
-          <div class="col-lg-3" style="margin-top: 6px;">
-            <select>
-              <option value="dep">Leaving</option>
-              <option value="arr">Arriving</option>
-            </select>
-          </div>
-          <div class="col-lg-5">
-            <input type="text" class="form-control" id="currentTime" name="currentTime"
-            value="<?php if(!isset($tripTime)){ date_default_timezone_set('Europe/London'); echo date('H:i'); } else { echo $tripTime; }?>">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-4 control-label" id="formLabel">Bus/Tube only</label>
-          <div style="margin-top: 9px;">
-            <div class="col-lg-1">
-              <input name="busset" type="checkbox" checked />
+        <?php } ?>
+        
+        
+        <div id="form">
+          <form style='width: 360px; margin: auto;' class="form-horizontal" action="result.php" method="post">
+            <input type="hidden" name="request" value="results" />
+            <div class="form-group">
+              <label for="startAddress" class="col-lg-4 control-label" id="formLabel">Start address</label>
+              <div class="col-lg-8">
+                <input type="text" class="col-lg-9 form-control" id="startAddress" name="startAddress" value="<?php echo $originpostcode ?>">
+              </div>
             </div>
-            <div class="col-lg-3">
-              Bus
+            <div class="form-group">
+              <label for="endAddress" class="col-lg-4 control-label" id="formLabel">End address</label>
+              <div class="col-lg-8">
+                <input type="text" class="form-control" id="endAddress" name="endAddress" value="<?php echo $destinationpostcode ?>">
+              </div>
             </div>
-            <div class="col-lg-1">
-              <input name="tubeset" type="checkbox" checked />
+            <div class="form-group">
+              <label for="currentTime" class="col-lg-4 control-label" id="formLabel">Start/end time</label>
+              <div class="col-lg-3" style="margin-top: 6px;">
+                <select>
+                  <option value="dep">Leaving</option>
+                  <option value="arr">Arriving</option>
+                </select>
+              </div>
+              <div class="col-lg-5">
+                <input type="text" class="form-control" id="currentTime" name="currentTime"
+                value="<?php if(!isset($tripTime)){ date_default_timezone_set('Europe/London'); echo date('H:i'); } else { echo $tripTime; }?>">
+              </div>
             </div>
-            <div class="col-lg-3">
-              Tube
+            <div class="form-group">
+              <div class="col-offset-2 col-lg-10">
+                <button type="submit" class="btn btn-primary">Calculate</button>
+                <a href="javascript:getPostcode()" class="btn btn-default">Use current location</a>
+              </div>
             </div>
-          </div>
+            <div class="form-group" style="margin-top: -10px;">
+              <div class="col-offset-2 col-lg-10">
+                <a href="javascript:useDefaults1()" class="btn btn-default">Defaults 1</a>
+                <a href="javascript:useDefaults2()" class="btn btn-default">Defaults 2</a>
+              </div>
+            </div>
+          </form>
+          <div id="geo" class="geolocation_data" style="visibility: hidden"></div>
         </div>
-        <div class="form-group">
-          <div class="col-offset-2 col-lg-10">
-            <button type="submit" class="btn btn-primary">Calculate</button>
-            <a href="javascript:getPostcode()" class="btn btn-default">Use current location</a>
-          </div>
-        </div>
-        <div class="form-group" style="margin-top: -10px;">
-          <div class="col-offset-2 col-lg-10">
-            <a href="javascript:useDefaults()" class="btn btn-default">Use defaults</a>
-          </div>
-        </div>
-      </form>
-      <div id="geo" class="geolocation_data" style="visibility: hidden"></div>
+      </div>
     </div>
     <script src='http://code.jquery.com/jquery.js'></script>
     <script src='js/bootstrap.min.js'></script>

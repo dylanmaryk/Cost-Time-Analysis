@@ -35,9 +35,14 @@ $tflurlquery .= $safedestination;
 $tflurlquery .= '&itdTripDateTimeDepArr=';
 $deparr = 'dep';
 $tflurlquery .= $deparr;
-foreach ($means as $transitem) {
-	if ($transitem['value']) $tflurlquery .= '&includedMeans=' . $transitem['id'];
+if($means == 'bus') {
+  $tflurlquery .= '&includedMeans=5';
+} elseif($means == 'tube') {
+  $tflurlquery .= '&includedMeans=2';
 }
+/*foreach ($means as $transitem) {
+	if ($transitem['value']) $tflurlquery .= '&includedMeans=' . $transitem['id'];
+}*/
 
 $xmlquery = 'http://journeyplanner.tfl.gov.uk/user/XML_TRIP_REQUEST2' . $tflurlquery . '&itdTime=' . $tripTime;
 
