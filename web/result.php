@@ -9,8 +9,8 @@
   if($showResults) {
     $originpostcode = $_POST['startAddress'];
     $destinationpostcode = $_POST['endAddress'];
+    include_once 'tflxmlparser.php';
   }
-  include_once 'tflxmlparser.php';
 ?>
 <!DOCTYPE html>
 <html lang='en'>
