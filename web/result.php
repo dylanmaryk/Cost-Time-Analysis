@@ -41,7 +41,7 @@
   <body style='padding-top: 20px;'>
     <div class='container' style='width: 360px; margin: auto;'>
       <img src='img/logo.png' style='width: 100%; height: 100%; margin-left: auto; margin-right: auto; display: block;' />
-      <hr>
+      <hr/>
       <?php if($showResults && !$invalidPostcode) { ?>
         <table class='table' style='width: 360px; margin: auto;'>
           <thead>
@@ -75,8 +75,8 @@
                         . $interchange->imgURI . '" alt="'
                         . $interchange->englishName . '" />';
                       } ?>
-                    </td>
-                  </div>
+                    </div>
+                  </td>
                 </tr>
                 <?php $i++;
               }
