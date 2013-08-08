@@ -104,7 +104,7 @@
         </div>
         <div class="form-group">
           <label for="currentTime" class="col-lg-4 control-label" id="formLabel">Start/end time</label>
-          <div class="col-lg-3" style="margin-top: 6px;">
+          <div class="col-lg-3" style="margin-top: 6px; margin-bottom: 6px;">
             <select>
               <option value="dep">Leaving</option>
               <option value="arr">Arriving</option>
