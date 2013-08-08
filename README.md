@@ -29,6 +29,10 @@ the second, etc. As per Booleans, above.
 Tube: &includedMeans=2
 Bus: &includedMeans=5
 
+#TODO:
+Implement a comparason operatior on transtort tocheck if routes have  different condions, start times and interchanges.
+do search to see if item already in array.
+
 #Route Array Elements
 departure
 arrival
