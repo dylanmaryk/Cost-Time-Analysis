@@ -3,6 +3,15 @@
   $destinationpostcode = $_GET['endAddress'];
   $arrdep = $_GET['arrdep'];
   $tripTime = $_GET['currentTime'];
+
+  $means = array(
+    0 => array(
+      'id' => 2,
+      'value' => (true)),
+    1 => array(
+      'id' => 5,
+      'value' => (true)));
+
   include "tflxmlparser.php";
 
   $routesEncode = json_encode($routes);
