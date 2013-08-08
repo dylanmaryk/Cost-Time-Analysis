@@ -119,13 +119,13 @@
           <label class="col-lg-4 control-label" id="formLabel">Bus/Tube only</label>
           <div style="margin-top: 9px;">
             <div class="col-lg-1">
-              <input type="radio" />
+              <input name="busset" type="checkbox" checked />
             </div>
             <div class="col-lg-3">
               Bus
             </div>
             <div class="col-lg-1">
-              <input type="radio" />
+              <input name="tubeset" type="checkbox" checked />
             </div>
             <div class="col-lg-3">
               Tube
