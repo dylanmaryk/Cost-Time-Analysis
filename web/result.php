@@ -40,7 +40,7 @@
       }
     </script>
   </head>
-  <body style='padding-top: 20px;'>
+  <body style='padding-top: 20px; background-color: #E0E0E0;'>
     <div class='container' style='width: 360px; margin: auto;'>
       <img src='img/logo.png' style='width: 100%; height: 100%; margin-left: auto; margin-right: auto; display: block;' />
       <hr/>
