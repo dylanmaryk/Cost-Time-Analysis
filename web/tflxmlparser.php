@@ -1,6 +1,5 @@
 <?php
-$DEBUG =false;
-
+$DEBUG = true;
 // report all errors to page
 if ($DEBUG) {
 	error_reporting(E_ALL);
@@ -34,11 +33,10 @@ $tflurlquery .= $safeorigin;
 $tflurlquery .= '&type_destination=locator&name_destination=';
 $tflurlquery .= $safedestination;
 $tflurlquery .= '&itdTripDateTimeDepArr=';
+$deparr = 'dep';
 $tflurlquery .= $deparr;
 
-$tflurlquery .= ' &itdTime=' . $time;
-
-$xmlquery = 'http://journeyplanner.tfl.gov.uk/user/XML_TRIP_REQUEST2' . $tflurlquery;
+$xmlquery = 'http://journeyplanner.tfl.gov.uk/user/XML_TRIP_REQUEST2' . $tflurlquery . '&itdTime=' . $tripTime;
 
 $curl = curl_init();
 curl_setopt_array($curl, array(
@@ -108,7 +106,7 @@ if (!$invalidPostcode) {
 			if ($method . '' == '') {
 				$method = 'Zug';
 			}
-			if ($DEBUG){echo $method . ', ';}
+			//if ($DEBUG){echo $method . ', ';}
 			foreach ($partialRoute->itdPoint as $point) {
 				if ($point->attributes()->usage == 'arrival') {
 					$time = $point->itdDateTime->itdTime;
@@ -142,6 +140,7 @@ if (!$invalidPostcode) {
     	$i++;
 	}
 
-	if ($DEBUG) var_dump($routes);
+	//if ($DEBUG) var_dump($routes);
+	if ($DEBUG) echo $xmlstring;
 }
 ?>

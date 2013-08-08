@@ -1,5 +1,4 @@
-<?php
-  
+<?php  
   include_once 'transportType.class.php';
   include_once 'route.class.php';
   
@@ -8,13 +7,12 @@
   $destinationpostcode = '';
   if($showResults) {
     $arrdep = $_POST['arrdep'];
-    $time = $_POST['currentTime'];
+    $tripTime = $_POST['currentTime'];
     $originpostcode = $_POST['startAddress'];
     $destinationpostcode = $_POST['endAddress'];
     include_once 'tflxmlparser.php';
   }
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang='en'>
   <head>
     <title>Time/Cost Analysis</title>
@@ -113,9 +111,8 @@
             </select>
           </div>
           <div class="col-lg-5">
-            <input type="text" class="form-control" id="currentTime" name="currentTime" value="
-            <?php if(!isset($time)){ date_default_timezone_set('Europe/London'); echo date('H:i'); } else { echo $time; }?>
-            ">
+            <input type="text" class="form-control" id="currentTime" name="currentTime"
+            value="<?php if(!isset($tripTime)){ date_default_timezone_set('Europe/London'); echo date('H:i'); } else { echo $tripTime; }?>">
           </div>
         </div>
         <div class="form-group">

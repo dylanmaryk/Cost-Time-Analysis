@@ -218,11 +218,11 @@ class tube extends transportType
 	);
 
 	public function tube($startloc,$endloc,$Hour,$Minute){
-		global $DEBUG;
+		/*global $DEBUG;
 		if ($DEBUG) {
 			echo "start zone: $startloc \n";
 			echo "end zone $endloc \n";
-		}
+		}*/
 		$this->start = $startloc;
 		$this->end = $endloc;
 		$this->startHour = $Hour;
@@ -254,11 +254,11 @@ class tube extends transportType
 				||($this->startHour == 6 && $this->startMinute >= 30)
 				||($this->startHour == 9 && $this->startMinute <= 29));
 		$journeycostobject['finish zone'] = $this->end;
-		global $DEBUG;
+		/*global $DEBUG;
 		if ($DEBUG) {
 			echo "start zone: " . $journeycostobject['start zone'];
 			echo "end zone: " . $journeycostobject['finish zone'];
-		}
+		}*/
 		$journeycostobject['cost'] = $journeycostobject['cost'] + 
 			self::$ticketprices[($ispeak ?'peak' :'offpeak')][$journeycostobject['start zone']]
 					[$journeycostobject['finish zone']];
