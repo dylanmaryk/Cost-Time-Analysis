@@ -8,9 +8,13 @@ if ($DEBUG) {
 	ini_set('display_errors', 'on');
 }
 
+
+
+
 include_once 'transportType.class.php';
 include_once 'route.class.php';
 include_once 'costengine.php';
+
 
 $meansOfTransportCodes = array(
 	0 => 'National Rail',
@@ -37,8 +41,6 @@ $transportImages['Fussweg'] = '/user/assets/images/icon-walk.gif';
 $transportImages['Bus'] = '/user/assets/images/icon-buses.gif';
 $transportImages['Underground'] = '/user/assets/images/icon-tube.gif';
 
-$originpostcode = 'SW1H 0BD';
-$destinationpostcode = 'SE11 5TN';
 $safeorigin = urlencode($originpostcode);
 $safedestination = urlencode($destinationpostcode);
 

@@ -26,6 +26,8 @@ abstract class transportType
 				return new tube($start,$end,$startHour,$startMinute);
 			case 'Zug':
 				return new train;
+			case 'Light Railway':
+				return new dlr;
 			default:
 				echo('unknown transport type: '. $method);
 				die('unknown transport type');	  
