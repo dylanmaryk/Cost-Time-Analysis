@@ -1,6 +1,6 @@
 <?php
 
-$DEBUG = false;
+$DEBUG = true;
 
 // report all errors to page
 if ($DEBUG) {
@@ -63,6 +63,10 @@ curl_setopt_array($curl, array(
 $xmlstring = curl_exec($curl);
 //probably should check this
 $responsecode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+if ($responsecode != 200) {
+	die ("bad response");
+}
 //echo $xmlstring;
 $xml = simplexml_load_string($xmlstring);
 //var_dump($xml);
@@ -73,6 +77,7 @@ $xmlroutes = $xml->itdTripRequest->itdItinerary->itdRouteList;
 // iterate through all the routes and print out the start and end times.
 $i = 0;
 $routes = array();
+var_dump($xmlroutes);
 foreach ($xmlroutes->itdRoute as $route) {
 	$routesToZones = array();
 	if ($route->itdFare->count() != 0) {
