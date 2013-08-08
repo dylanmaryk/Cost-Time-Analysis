@@ -58,6 +58,7 @@ class bus extends transportType
 
 	public function price($journeycostobject) {
 		$journeycostobject['inzonejourney'] = false;
+		if ($journeycostobject['cap'] < 440) $journeycostobject['cap'] = 440;
 		if (!array_key_exists('Bus',$journeycostobject['traveltypes'])) { $journeycostobject['traveltypes']['Bus'] = 0;}
 		if (!$journeycostobject['peak']) {
 			if (($this->startHour > 4 && $this->startHour < 9) 
@@ -66,16 +67,12 @@ class bus extends transportType
 				$journeycostobject['peak'] = true;
 			}
 		}
-		if (count($journeycostobject['traveltypes']) == 1 && array_key_exists('Bus',$journeycostobject['traveltypes'])) {
-	    	if ($journeycostobject['cost'] <= 340) {
-				$journeycostobject['cost'] += 140;   
-            } elseif ($journeycostobject['cost'] <= 440) {
-               $journeycostobject['cost'] += (440 - $journeycostobject['cost']);
-            } else {
-        	}
-		} else {
-			die ("bus does not know how to handle non bus transport forms");
-		}
+    	if ($journeycostobject['cost'] <= ($journeycostobject['cap'] - 140)) {
+			$journeycostobject['cost'] += 140;   
+        } elseif ($journeycostobject['cost'] <= $journeycostobject['cap']) {
+           $journeycostobject['cost'] += ($journeycostobject['cap'] - $journeycostobject['cost']);
+        } else {
+    	}
 		return $journeycostobject;
 	}
 }
@@ -215,6 +212,118 @@ class tube extends transportType
 			9 => array(
 				9 => 150)
 		),
+		'peakcaps'=> array(
+			1 => array(
+				1 => 840,
+				2 => 840,
+				3 => 1060,
+				4 => 1060,
+				5 => 1580,
+				6 => 1580,
+				7 => 1960,
+				8 => 1960,
+				9 => 1960),
+			2 => array(
+				2 => 840,
+				3 => 1060,
+				4 => 1060,
+				5 => 1580,
+				6 => 1580,
+				7 => 1960,
+				8 => 1960,
+				9 => 1960),
+			3 => array(
+				3 => 1060,
+				4 => 1060,
+				5 => 1580,
+				6 => 1580,
+				7 => 1960,
+				8 => 1960,
+				9 => 1960),
+			4 => array(
+				4 => 1060,
+				5 => 1580,
+				6 => 1580,
+				7 => 1960,
+				8 => 1960,
+				9 => 1960),
+			5 => array(
+				5 => 1580,
+				6 => 1580,
+				7 => 1960,
+				8 => 1960,
+				9 => 1960),
+			6 => array(
+				6 => 1580,
+				7 => 1960,
+				8 => 1960,
+				9 => 1960),
+			7 => array(
+				7 => 1960,
+				8 => 1960,
+				9 => 1960),
+			8 => array(
+				8 => 1960,
+				9 => 1960),
+			9 => array(
+				9 => 1960)
+		),
+		'offpeakcaps' => array(
+			1 => array(
+				1 => 700,
+				2 => 700,
+				3 => 770,
+				4 => 770,
+				5 => 850,
+				6 => 850,
+				7 => 1160,
+				8 => 1160,
+				9 => 1160),
+			2 => array(
+				2 => 700,
+				3 => 770,
+				4 => 770,
+				5 => 850,
+				6 => 850,
+				7 => 1160,
+				8 => 1160,
+				9 => 1160),
+			3 => array(
+				3 => 770,
+				4 => 770,
+				5 => 850,
+				6 => 850,
+				7 => 1160,
+				8 => 1160,
+				9 => 1160),
+			4 => array(
+				4 => 770,
+				5 => 850,
+				6 => 850,
+				7 => 1160,
+				8 => 1160,
+				9 => 1570),
+			5 => array(
+				5 => 850,
+				6 => 850,
+				7 => 1160,
+				8 => 1160,
+				9 => 1160),
+			6 => array(
+				6 => 850,
+				7 => 1160,
+				8 => 1160,
+				9 => 1160),
+			7 => array(
+				7 => 1160,
+				8 => 1160,
+				9 => 1160),
+			8 => array(
+				8 => 1160,
+				9 => 1160),
+			9 => array(
+				9 => 1160)
+		),
 	);
 
 	public function tube($startloc,$endloc,$Hour,$Minute){
@@ -233,6 +342,10 @@ class tube extends transportType
 					self::$ticketprices['peak'][$i][$j] = self::$ticketprices['peak'][$j][$i];
 					self::$ticketprices['offpeak'][$i][$j] = 
 						self::$ticketprices['offpeak'][$j][$i];
+					self::$ticketprices['offpeakcaps'][$i][$j] = 
+						self::$ticketprices['offpeakcaps'][$j][$i];
+					self::$ticketprices['peakcaps'][$i][$j] = 
+						self::$ticketprices['peakcaps'][$j][$i];
 				}
 			}
 		}
