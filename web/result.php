@@ -18,6 +18,11 @@
     <title>Time/Cost Analysis</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style type="text/css">
+      html {
+       overflow-y: scroll;
+      }
+    </style>
     <script type="text/javascript">
       var useDefaults = function() {}
       window.onload = function(e) {
@@ -31,8 +36,8 @@
     </script>
   </head>
   <body style='padding-top: 20px;'>
-    <div class='container'>
-      <img src='img/logo.png' style='width: 50%; height: 50%; margin-left: auto; margin-right: auto; display: block;' />
+    <div class='container' style='width: 360px; margin: auto;'>
+      <img src='img/logo.png' style='width: 100%; height: 100%; margin-left: auto; margin-right: auto; display: block;' />
       <hr>
       <?php if($showResults && !$invalidPostcode) { ?>
         <table class='table' style='width: 360px; margin: auto;'>
@@ -75,11 +80,12 @@
             ?>
           </tbody>
         </table>
+        <hr style='width: 360px; margin: auto; margin-bottom: 25px' />
       <?php } ?>
       <?php if($invalidPostcode) { ?>
         <h3> Invalid Postcode </h3>
       <?php } ?>
-      <form class="form-horizontal" action="result.php" method="post">
+      <form style='width: 360px; margin: auto;' class="form-horizontal" action="result.php" method="post">
         <input type="hidden" name="request" value="results" />
         <div class="form-group">
           <label for="startAddress" class="col-lg-2 control-label" id="formLabel">Start address</label>
