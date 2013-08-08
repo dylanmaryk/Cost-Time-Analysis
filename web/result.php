@@ -1,5 +1,5 @@
 <?php
-
+  
   include_once 'transportType.class.php';
   include_once 'route.class.php';
   
@@ -7,6 +7,8 @@
   $originpostcode = '';
   $destinationpostcode = '';
   if($showResults) {
+    $arrdep = $_POST['arrdep'];
+    $time = $_POST['currentTime'];
     $originpostcode = $_POST['startAddress'];
     $destinationpostcode = $_POST['endAddress'];
     include_once 'tflxmlparser.php';
@@ -104,14 +106,16 @@
         </div>
         <div class="form-group">
           <label for="currentTime" class="col-lg-4 control-label" id="formLabel">Start/end time</label>
-          <div class="col-lg-3" style="margin-top: 6px; margin-bottom: 6px;">
+          <div class="col-lg-3" style="margin-top: 6px;">
             <select>
               <option value="dep">Leaving</option>
               <option value="arr">Arriving</option>
             </select>
           </div>
           <div class="col-lg-5">
-            <input type="text" class="form-control" id="currentTime" name="currentTime" value="<?php date_default_timezone_set('Europe/London'); echo date('H:i') ?>">
+            <input type="text" class="form-control" id="currentTime" name="currentTime" value="
+            <?php if(!isset($time)){ date_default_timezone_set('Europe/London'); echo date('H:i'); } else { echo $time; }?>
+            ">
           </div>
         </div>
         <div class="form-group">
