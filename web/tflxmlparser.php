@@ -8,9 +8,6 @@ if ($DEBUG) {
 	ini_set('display_errors', 'on');
 }
 
-
-
-
 include_once 'transportType.class.php';
 include_once 'route.class.php';
 include_once 'costengine.php';
@@ -29,17 +26,6 @@ $meansOfTransportCodes = array(
 	9 => 'London',
 	10 => 'Not Used',
 	11 => 'Replacement Buses');
-
-$transportNames = array();
-$transportNames['Fussweg'] = 'Walk';
-$transportNames['Bus'] = 'Bus';
-$transportNames['Underground'] = 'Tube';
-
-$transportImagesDomain = 'http://journeyplanner.tfl.gov.uk';
-$transportImages = array();
-$transportImages['Fussweg'] = '/user/assets/images/icon-walk.gif';
-$transportImages['Bus'] = '/user/assets/images/icon-buses.gif';
-$transportImages['Underground'] = '/user/assets/images/icon-tube.gif';
 
 $safeorigin = urlencode($originpostcode);
 $safedestination = urlencode($destinationpostcode);
@@ -85,7 +71,6 @@ if (!$invalidPostcode) {
 	// iterate through all the routes and print out the start and end times.
 	$i = 0;
 	$routes = array();
-	var_dump($xmlroutes);
 	foreach ($xmlroutes->itdRoute as $route) {
 		$routesToZones = array();
 		if ($route->itdFare->count() != 0) {
@@ -153,7 +138,7 @@ if (!$invalidPostcode) {
 	
 		$routes[$i] = new route($departure, $arrival, $duration, $detailsLink, $interchanges);
 		$routes[$i]->cost = costs($routes[$i]); 
-	    $i++;
+	  $i++;
 	}
 
 	if ($DEBUG) var_dump($routes);
