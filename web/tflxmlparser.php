@@ -1,5 +1,5 @@
 <?php
-$DEBUG = true;
+$DEBUG = false;
 // report all errors to page
 if ($DEBUG) {
 	error_reporting(E_ALL);
