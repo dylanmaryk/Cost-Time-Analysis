@@ -6,6 +6,13 @@
   $originpostcode = '';
   $destinationpostcode = '';
   if($showResults) {
+    $means = array(
+	0 => array(
+		'id' => 2,
+		'value' => (isset($_POST['busset'])?$_POST['busset']:true)),
+	1 => array(
+		'id' => 5,
+		'value' => (isset($_POST['tubeset'])?$_POST['tubeset']:true)));
     $arrdep = $_POST['arrdep'];
     $tripTime = $_POST['currentTime'];
     $originpostcode = $_POST['startAddress'];
