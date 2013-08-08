@@ -103,6 +103,18 @@
           </div>
         </div>
         <div class="form-group">
+          <label for="currentTime" class="col-lg-4 control-label" id="formLabel">Start/end time</label>
+          <div class="col-lg-3" style="margin-top: 6px;">
+            <select>
+              <option value="dep">Leaving</option>
+              <option value="arr">Arriving</option>
+            </select>
+          </div>
+          <div class="col-lg-5">
+            <input type="text" class="form-control" id="currentTime" name="currentTime" value="<?php date_default_timezone_set('Europe/London'); echo date('H:i') ?>">
+          </div>
+        </div>
+        <div class="form-group">
           <div class="col-offset-2 col-lg-10">
             <button type="submit" class="btn btn-primary">Calculate</button>
             <a href="javascript:getPostcode()" class="btn btn-default">Use current location</a>
