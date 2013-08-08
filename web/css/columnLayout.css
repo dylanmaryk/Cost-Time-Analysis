@@ -1,0 +1,20 @@
+#wrap {
+    width: 840px;
+    margin: 0 auto;
+}
+
+#form {
+    clear: both;
+}
+
+#tube {
+    float: left;
+    width: 360px;
+    padding-right: 50px;
+}
+
+#bus {
+    float: right;
+    width: 360px;
+    padding-left: 50px;
+}
