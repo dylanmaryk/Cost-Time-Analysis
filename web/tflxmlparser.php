@@ -85,7 +85,6 @@ if (!$invalidPostcode) {
 	// iterate through all the routes and print out the start and end times.
 	$i = 0;
 	$routes = array();
-	var_dump($xmlroutes);
 	foreach ($xmlroutes->itdRoute as $route) {
 		$routesToZones = array();
 		if ($route->itdFare->count() != 0) {
