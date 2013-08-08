@@ -123,6 +123,23 @@
           </div>
         </div>
         <div class="form-group">
+          <label class="col-lg-4 control-label" id="formLabel">Bus/Tube only</label>
+          <div style="margin-top: 9px;">
+            <div class="col-lg-1">
+              <input name="busset" type="checkbox" checked />
+            </div>
+            <div class="col-lg-3">
+              Bus
+            </div>
+            <div class="col-lg-1">
+              <input name="tubeset" type="checkbox" checked />
+            </div>
+            <div class="col-lg-3">
+              Tube
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
           <div class="col-offset-2 col-lg-10">
             <button type="submit" class="btn btn-primary">Calculate</button>
             <a href="javascript:getPostcode()" class="btn btn-default">Use current location</a>
