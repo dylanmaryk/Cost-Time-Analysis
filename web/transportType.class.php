@@ -246,7 +246,7 @@ class tube extends transportType
 		} else {
 			$ispeak = $journeycostobject['peak'];
 			$journeycostobject['cost'] = $journeycostobject['cost'] - 
-				self::$ticketprices[$ispeak][$journeycostobject['start zone']]
+				self::$ticketprices[($ispeak?'peak' :'offpeak')][$journeycostobject['start zone']]
 					[$journeycostobject['finish zone']];
 		}
 		$ispeak = ($journeycostobject['peak']
@@ -260,7 +260,7 @@ class tube extends transportType
 			echo "end zone: " . $journeycostobject['finish zone'];
 		}
 		$journeycostobject['cost'] = $journeycostobject['cost'] + 
-			self::$ticketprices[$ispeak][$journeycostobject['start zone']]
+			self::$ticketprices[($ispeak ?'peak' :'offpeak')][$journeycostobject['start zone']]
 					[$journeycostobject['finish zone']];
 		$journeycostobject['peak'] = $ispeak;
 		return $journeycostobject;
