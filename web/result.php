@@ -18,6 +18,7 @@
     <div class='container'>
       <img src='img/logo.png' style='width: 50%; height: 50%; margin-left: auto; margin-right: auto; display: block;' />
       <hr>
+      <?php if(!$invalidPostcode) { ?>
       <table class='table' style='width: 360px; margin: auto;'>
         <thead>
           <th></th>
@@ -58,6 +59,9 @@
           ?>
         </tbody>
       </table>
+      <?php } else { ?>
+      <h3> Invalid Postcode </h3>
+      <?php } ?>
     </div>
     <script src='http://code.jquery.com/jquery.js'></script>
     <script src='js/bootstrap.min.js'></script>
