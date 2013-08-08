@@ -1,6 +1,5 @@
 <?php
-
-$DEBUG = false;
+$DEBUG =false;
 
 // report all errors to page
 if ($DEBUG) {
@@ -34,8 +33,10 @@ $tflurlquery = '?language=en&sessionID=0&place_origin=London&place_destination=L
 $tflurlquery .= $safeorigin;
 $tflurlquery .= '&type_destination=locator&name_destination=';
 $tflurlquery .= $safedestination;
-// use if we want to allow future calculations
-//$tflurlquery .= '&itdDate=' .$date. ' &itdTime=' $time;
+$tflurlquery .= '&itdTripDateTimeDepArr=';
+$tflurlquery .= $deparr;
+
+$tflurlquery .= ' &itdTime=' . $time;
 
 $xmlquery = 'http://journeyplanner.tfl.gov.uk/user/XML_TRIP_REQUEST2' . $tflurlquery;
 
