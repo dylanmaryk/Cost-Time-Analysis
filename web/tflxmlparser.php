@@ -59,7 +59,7 @@ $xml = simplexml_load_string($xmlstring);
 //var_dump($xml);
 $invalidPostcode = false;
 foreach($xml->itdTripRequest->itdOdv as $location) {
-	if ($location->itdOdvName['state'] == 'list'){
+	if ($location->itdOdvName['state'] == 'list' || $location->itdOdvName['state'] == 'empty'){
 		$invalidPostcode = true;
 	}
 }
