@@ -32,6 +32,9 @@
           start.value = 'SW1H 0BD';
           end.value = 'SE11 5TN';
         }
+        getPostcode = function() {
+          document.getElementById("startAddress").value = document.getElementById("geo").innerHTML;
+        }
       }
     </script>
   </head>
@@ -88,14 +91,14 @@
       <form style='width: 360px; margin: auto;' class="form-horizontal" action="result.php" method="post">
         <input type="hidden" name="request" value="results" />
         <div class="form-group">
-          <label for="startAddress" class="col-lg-2 control-label" id="formLabel">Start address</label>
-          <div class="col-lg-10">
+          <label for="startAddress" class="col-lg-4 control-label" id="formLabel">Start address</label>
+          <div class="col-lg-8">
             <input type="text" class="col-lg-9 form-control" id="startAddress" name="startAddress" value="<?php echo $originpostcode ?>">
           </div>
         </div>
         <div class="form-group">
-          <label for="endAddress" class="col-lg-2 control-label" id="formLabel">End address</label>
-          <div class="col-lg-10">
+          <label for="endAddress" class="col-lg-4 control-label" id="formLabel">End address</label>
+          <div class="col-lg-8">
             <input type="text" class="form-control" id="endAddress" name="endAddress" value="<?php echo $destinationpostcode ?>">
           </div>
         </div>
@@ -103,12 +106,18 @@
           <div class="col-offset-2 col-lg-10">
             <button type="submit" class="btn btn-primary">Calculate</button>
             <a href="javascript:getPostcode()" class="btn btn-default">Use current location</a>
-            <a href="javascript:useDefaults()" class="btn btn-default">Use Defaults</a>
+          </div>
+        </div>
+        <div class="form-group" style="margin-top: -10px;">
+          <div class="col-offset-2 col-lg-10">
+            <a href="javascript:useDefaults()" class="btn btn-default">Use defaults</a>
           </div>
         </div>
       </form>
+      <div id="geo" class="geolocation_data" style="visibility: hidden"></div>
     </div>
     <script src='http://code.jquery.com/jquery.js'></script>
     <script src='js/bootstrap.min.js'></script>
+    <script src="js/geo.js"></script>
   </body>
 </html>
