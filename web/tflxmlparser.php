@@ -99,62 +99,63 @@ if (!$invalidPostcode) {
 				$routesToZones[$zonePR] = $zonenum;
 			}
 		}
-		$prl = $route->itdPartialRouteList;
-	
-		$startTime = $prl->itdPartialRoute->itdPoint->itdDateTime->itdTime;
-		$startHour = $startTime['hour'];
-		$startMinute = $startTime['minute'];
-	
-		$endpr = $prl->itdPartialRoute[count($prl->itdPartialRoute) - 1];
-		$endTime = $endpr->itdPoint[count($endpr->itdPoint) - 1]->itdDateTime->itdTime;
-		$endHour = $endTime['hour'];
-		$endMinute = $endTime['minute'];
-	
-		$travelTime = $route['publicDuration'];
-	
-		$interchanges = array();
-		$j = 0;
-		foreach ($prl->itdPartialRoute as $partialRoute) {
-			$method = $partialRoute->itdMeansOfTransport['productName'];
-			if ($method == 'Wheelchair Access') continue;
-		
-			if ($method . '' == '') {
-				$method = 'Zug';
-			}
-			if ($DEBUG){echo $method . ', ';}
-			foreach ($partialRoute->itdPoint as $point) {
-				if ($point->attributes()->usage == 'arrival') {
-					$time = $point->itdDateTime->itdTime;
-					$arrivalStartHour = $time['hour'];
-					$arrivalStartMinute = $time['minute'];
-				} elseif ($point->attributes()->usage == 'departure') {
-				} else {
-					die('unknown point type');
-				}
-			}
-			$arrivalLoc = 0;
-			$destination = 0;
-			if (array_key_exists($j,$routesToZones)) {
-				$arrivalLoc = $routesToZones[$j][0];
-				$destination = $routesToZones[$j][1];
-			}
-			$interchanges[$j] = transportType::createTransportType($method . '',$arrivalStartHour,$arrivalStartMinute,$arrivalLoc,$destination);
-			$j++;
-		}
-	
-		$departure = date ('H:i', strtotime($startHour . ':' . $startMinute));
-		$arrival = date ('H:i', strtotime($endHour . ':' . $endMinute));
-		$duration  = date ('H:i', strtotime($travelTime));
-	
-		$detailsLink = 'http://journeyplanner.tfl.gov.uk/user/XSLT_TRIP_REQUEST2'
-		. $tflurlquery . '=1&itdLPxx_view=detail&calcNumberOfTrips=1&noAlt=1&itdTime='
-		. $departure . '&itdTripDateTimeDepArr=dep';
-	
-		$routes[$i] = new route($departure, $arrival, $duration, $detailsLink, $interchanges);
-		$routes[$i]->cost = costs($routes[$i]); 
-	    $i++;
 	}
-
-	if ($DEBUG) var_dump($routes);
+	$prl = $route->itdPartialRouteList;
+	
+	$startTime = $prl->itdPartialRoute->itdPoint->itdDateTime->itdTime;
+	$startHour = $startTime['hour'];
+	$startMinute = $startTime['minute'];
+	
+	$endpr = $prl->itdPartialRoute[count($prl->itdPartialRoute) - 1];
+	$endTime = $endpr->itdPoint[count($endpr->itdPoint) - 1]->itdDateTime->itdTime;
+	$endHour = $endTime['hour'];
+	$endMinute = $endTime['minute'];
+	
+	$travelTime = $route['publicDuration'];
+	
+	$interchanges = array();
+	$j = 0;
+	foreach ($prl->itdPartialRoute as $partialRoute) {
+		$method = $partialRoute->itdMeansOfTransport['productName'];
+		if ($method == 'Wheelchair Access') continue;
+		
+		if ($method . '' == '') {
+			$method = 'Zug';
+		}
+		if ($DEBUG){echo $method . ', ';}
+		foreach ($partialRoute->itdPoint as $point) {
+			if ($point->attributes()->usage == 'arrival') {
+				$time = $point->itdDateTime->itdTime;
+				$arrivalStartHour = $time['hour'];
+				$arrivalStartMinute = $time['minute'];
+			} elseif ($point->attributes()->usage == 'departure') {
+			} else {
+				die('unknown point type');
+			}
+		}
+		$arrivalLoc = 0;
+		$destination = 0;
+		if (array_key_exists($j,$routesToZones)) {
+			$arrivalLoc = $routesToZones[$j][0];
+			$destination = $routesToZones[$j][1];
+		}
+		$interchanges[$j] = transportType::createTransportType($method . '',$arrivalStartHour,$arrivalStartMinute,$arrivalLoc,$destination);
+		$j++;
+	}
+	
+	$departure = date ('H:i', strtotime($startHour . ':' . $startMinute));
+	$arrival = date ('H:i', strtotime($endHour . ':' . $endMinute));
+	$duration  = date ('H:i', strtotime($travelTime));
+	
+	$detailsLink = 'http://journeyplanner.tfl.gov.uk/user/XSLT_TRIP_REQUEST2'
+	. $tflurlquery . '=1&itdLPxx_view=detail&calcNumberOfTrips=1&noAlt=1&itdTime='
+	. $departure . '&itdTripDateTimeDepArr=dep';
+	
+	$routes[$i] = new route($departure, $arrival, $duration, $detailsLink, $interchanges);
+	$routes[$i]->cost = costs($routes[$i]); 
+    $i++;
 }
+
+if ($DEBUG) var_dump($routes);
+
 ?>

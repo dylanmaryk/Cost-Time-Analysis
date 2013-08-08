@@ -18,7 +18,6 @@ abstract class transportType
     	public static function createTransportType($method,$startHour,$startMinute,$start,$end) {
        	switch ($method) {
         	case 'Bus':
-				echo $startHour;
 				return new bus($startHour,$startMinute);
 			case 'Fussweg':
 				return new walk;
@@ -61,7 +60,6 @@ class bus extends transportType
 		$journeycostobject['inzonejourney'] = false;
 		if (!array_key_exists('Bus',$journeycostobject['traveltypes'])) { $journeycostobject['traveltypes']['Bus'] = 0;}
 		if (!$journeycostobject['peak']) {
-			echo $this->startHour;
 			if (($this->startHour > 4 && $this->startHour < 9) 
 				||($this->startHour == 4 && $this->startMinute >= 30)
 				||($this->startHour == 9 && $this->startMinute <= 29)) {
