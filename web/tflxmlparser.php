@@ -140,7 +140,7 @@ if (!$invalidPostcode) {
     	$i++;
 	}
 
-	if ($DEBUG) var_dump($routes);
-	//if ($DEBUG) echo $xmlstring;
+	//if ($DEBUG) var_dump($routes);
+	if ($DEBUG) echo $xmlquery;
 }
 ?>
