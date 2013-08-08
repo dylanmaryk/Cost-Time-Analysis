@@ -1,6 +1,6 @@
 <?php
 
-$DEBUG = true;
+$DEBUG = false;
 
 // report all errors to page
 if ($DEBUG) {
@@ -37,8 +37,8 @@ $transportImages['Fussweg'] = '/user/assets/images/icon-walk.gif';
 $transportImages['Bus'] = '/user/assets/images/icon-buses.gif';
 $transportImages['Underground'] = '/user/assets/images/icon-tube.gif';
 
-$originpostcode = 'AL2 1AE';
-$destinationpostcode = 'SW1H 0BD';
+$originpostcode = 'SW1H 0BD';
+$destinationpostcode = 'SE11 5TN';
 $safeorigin = urlencode($originpostcode);
 $safedestination = urlencode($destinationpostcode);
 
@@ -73,15 +73,15 @@ $i = 0;
 $routes = array();
 foreach ($xmlroutes->itdRoute as $route) {
 	$routesToZones = array();
-	if ($route->itdFare != '') {
-		foreach ($route->itdFare as $routezones) {
+	if ($route->itdFare->count() != 0) {
+		foreach ($route->itdFare->itdTariffzones as $routezones) {
 			$j = 0;
-			foreach ($routezones->itdTariffzones->itdZones as $zone){
+			foreach ($routezones->itdZones as $zone){
 				$zonenum[$j] = ($zone->zoneElem . "") + 0;
 				$j++;
 			}
 			if (count($zonenum) == 1) {$zonenum[1] = $zonenum[0];}
-			$zonePR = $zone->itdTariffzones->attributes()->toPR;
+			$zonePR = $routezones->attributes()->toPR + 0;
 			$routesToZones[$zonePR] = $zonenum;
 		}
 	}
@@ -119,6 +119,7 @@ foreach ($xmlroutes->itdRoute as $route) {
 			}
 		}
 		$arrivalLoc = 0;
+		$destination = 0;
 		if (array_key_exists($j,$routesToZones)) {
 			$arrivalLoc = $routesToZones[$j][0];
 			$destination = $routesToZones[$j][1];

@@ -18,6 +18,7 @@ abstract class transportType
     	public static function createTransportType($method,$startHour,$startMinute,$start,$end) {
        	switch ($method) {
         	case 'Bus':
+				echo $startHour;
 				return new bus($startHour,$startMinute);
 			case 'Fussweg':
 				return new walk;
@@ -49,16 +50,19 @@ class bus extends transportType
 	public $startMinute;
 
 	public function bus($Hour,$Minute) {
-		$startHour = $Hour + 0;
-		$startMinute = $Minute + 0;
+		if ($Hour == "")  {die( "missing hour");}
+		$this->startHour = $Hour + 0;
+		$this->startMinute = $Minute + 0;
 	}
 
 	public function price($journeycostobject) {
+		$journeycostobject['inzonejourney'] = false;
 		if (!array_key_exists('Bus',$journeycostobject['traveltypes'])) { $journeycostobject['traveltypes']['Bus'] = 0;}
 		if (!$journeycostobject['peak']) {
-			if (($startHour > 4 && $startHour < 9) 
-				||($startHour == 4 && $startMinute >= 30)
-				||($startHour == 9 && $startMinute <= 29)) {
+			echo $this->startHour;
+			if (($this->startHour > 4 && $this->startHour < 9) 
+				||($this->startHour == 4 && $this->startMinute >= 30)
+				||($this->startHour == 9 && $this->startMinute <= 29)) {
 				$journeycostobject['peak'] = true;
 			}
 		}
@@ -83,6 +87,7 @@ class walk extends transportType
 	public $imgURI = '/user/assets/images/icon-walk.gif';
 	
 	public function price($journeycostobject) {
+		$journeycostobject['inzonejourney'] = false;
 		return $journeycostobject;
 	}
 }
@@ -97,7 +102,7 @@ class tube extends transportType
 	public $startHour;
 	public $startMinute;
 	// does not include euston - watford junction anomoly
-	private $ticketprices = array(
+	public static $ticketprices = array(
 		'peak'=> array(
 			1 => array(
 				1 => 210,
@@ -213,19 +218,51 @@ class tube extends transportType
 	);
 
 	public function tube($startloc,$endloc,$Hour,$Minute){
-		$start = $startloc;
-		$end = $endloc;
-		$startHour = $Hour;
-		$startMinute = $Minute;
-		for($i = 1;$i <= 9; $i++ ){
-			for($j = 1; $j < $i; $j++){
-				$ticketprices['peak'][$i][$j] = $ticketprices['peak'][$j][$i];
-				$ticketprices['offpeak'][$i][$j] = $ticketprices['offpeak'][$j][$i];
+		global $DEBUG;
+		if ($DEBUG) {
+			echo "start zone: $startloc \n";
+			echo "end zone $endloc \n";
+		}
+		$this->start = $startloc;
+		$this->end = $endloc;
+		$this->startHour = $Hour;
+		$this->startMinute = $Minute;
+		if (!array_key_exists(1,self::$ticketprices['peak'][2])) {
+			for($i = 1;$i <= 9; $i++ ){
+				for($j = 1; $j < $i; $j++){
+					self::$ticketprices['peak'][$i][$j] = self::$ticketprices['peak'][$j][$i];
+					self::$ticketprices['offpeak'][$i][$j] = 
+						self::$ticketprices['offpeak'][$j][$i];
+				}
 			}
 		}
 	}
 	
 	public function price($journeycostobject) {
+		
+		if (!$journeycostobject['inzonejourney']) {
+			$journeycostobject['start zone'] = $this->start;
+			$journeycostobject['inzonejourney'] = true;
+		} else {
+			$ispeak = $journeycostobject['peak'];
+			$journeycostobject['cost'] = $journeycostobject['cost'] - 
+				self::$ticketprices[$ispeak][$journeycostobject['start zone']]
+					[$journeycostobject['finish zone']];
+		}
+		$ispeak = ($journeycostobject['peak']
+				||($this->startHour > 6 && $this->startHour < 9) 
+				||($this->startHour == 6 && $this->startMinute >= 30)
+				||($this->startHour == 9 && $this->startMinute <= 29));
+		$journeycostobject['finish zone'] = $this->end;
+		global $DEBUG;
+		if ($DEBUG) {
+			echo "start zone: " . $journeycostobject['start zone'];
+			echo "end zone: " . $journeycostobject['finish zone'];
+		}
+		$journeycostobject['cost'] = $journeycostobject['cost'] + 
+			self::$ticketprices[$ispeak][$journeycostobject['start zone']]
+					[$journeycostobject['finish zone']];
+		$journeycostobject['peak'] = $ispeak;
 		return $journeycostobject;
 		// tube specific price calcuations.
 	}
