@@ -65,8 +65,8 @@
         useDefaults = function() {
           start = document.getElementById('startAddress');
           end = document.getElementById('endAddress');
-          start.value = 'SW1H 0BD';
-          end.value = 'SE11 5TN';
+          start.value = 'WD5 0DH';
+          end.value = 'DA5 1AN';
         }
         getPostcode = function() {
           document.getElementById("startAddress").value = document.getElementById("geo").innerHTML;
@@ -76,7 +76,7 @@
   </head>
   <body style='padding-top: 20px; background-color: #E0E0E0;'>
     <div class='container' style='width: 360px; margin: auto;'>
-      <img src='img/logo.png' style='width: 100%; height: 100%; margin-left: auto; margin-right: auto; display: block;' />
+      <img src='img/logo.png' style='width: 100%; margin-left: auto; margin-right: auto; display: block;' />
       <hr/>
       <?php if($showResults && !$invalidPostcode) { ?>
         <table class='table' style='width: 360px; margin: auto;'>

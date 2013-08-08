@@ -17,7 +17,7 @@
         foreach ($route->interchanges as $transporttype){
 	    $journeycostobject = $transporttype->price($journeycostobject);
         }
-	if ($DEBUG) {echo $journeycostobject['cost'];}
+	/*if ($DEBUG) {echo $journeycostobject['cost'];}*/
         return $journeycostobject['cost'];
     }
 ?>
