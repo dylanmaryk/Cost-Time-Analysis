@@ -36,11 +36,10 @@ $tflurlquery .= '&itdTripDateTimeDepArr=';
 //$deparr = 'dep';
 $tflurlquery .= $deparr;
 foreach ($means as $transitem) {
-	if ($transitem['value']) $tflurlquery .= '&includedMeans=' . $transitem['id'];
+	if ($transitem['value']) $tflurlquery .= '&includedMeans[]=' . $transitem['id'];
 }
 
-$xmlquery = 'http://journeyplanner.tfl.gov.uk/user/XML_TRIP_REQUEST2' . $tflurlquery . '&itdTime=' . $tripTime;
-
+$xmlquery = "localhost/yrs2013/Cost-Time-Analysis/web/faketfl.php" . $tflurlquery . '&itdTime=' . $tripTime;
 $curl = curl_init();
 curl_setopt_array($curl, array(
 	CURLOPT_RETURNTRANSFER => 1,
