@@ -136,10 +136,19 @@ if (!$invalidPostcode && ((string)$xml->itdTripRequest->itdMessage == "")) {
 		$detailsLink = '/details.html';/*'http://journeyplanner.tfl.gov.uk/user/XSLT_TRIP_REQUEST2'
 		. $tflurlquery . '&itdLPxx_view=detail&calcNumberOfTrips=1&noAlt=1&itdTime='
 		. $departure . '&itdTripDateTimeDepArr=dep';*/
-	
-		$routes[$i] = new route($departure, $arrival, $duration, $detailsLink, $interchanges);
-		$routes[$i]->cost = costs($routes[$i]); 
-    	$i++;
+		$thisroute = new route($departure, $arrival, $duration, $detailsLink, $interchanges,$means);
+		$found = false;
+		foreach ($routes as $currentroute) {
+			if($thisroute->equals($currentroute)){				
+				$found = true;
+				break;
+			}
+		}
+		if(!$found) {
+			$routes[$i] = $thisroute;
+			$routes[$i]->cost = costs($routes[$i]); 
+   			$i++;
+		}
 	}
 
 	//if ($DEBUG) var_dump($routes);
