@@ -64,14 +64,13 @@ foreach($xml->itdTripRequest->itdOdv as $location) {
 		$invalidPostcode = true;
 	}
 }
-if (!$invalidPostcode) {
+$routes = isset($routes)?$routes:array();
+if (!$invalidPostcode && ((string)$xml->itdTripRequest->itdMessage == "")) {
 	$xmlroutes = $xml->itdTripRequest->itdItinerary->itdRouteList;
 	//var_dump($routes);
 	//echo $routes->asXML();
 
 	// iterate through all the routes and print out the start and end times.
-	
-	$routes = isset($routes)?$routes:array();
 	$i = count($routes) - 1;
 	foreach ($xmlroutes->itdRoute as $route) {
 		$routesToZones = array();

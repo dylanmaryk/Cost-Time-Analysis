@@ -1,6 +1,4 @@
 <?php
-	error_reporting(E_ALL);
-	ini_set('display_errors', 'on');
 	$start = urlencode($_GET['name_origin']);
 	$end   = urlencode($_GET['name_destination']);
 	$included = $_GET['includedMeans'];
