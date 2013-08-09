@@ -10,7 +10,7 @@ abstract class transportType
 	public $ID = '';
 	public $englishName = '';
 	public $imgURI = '';
-	public static $imgDomain = 'http://journeyplanner.tfl.gov.uk';
+	public static $imgDomain = 'http://localhost/yrs2013/Cost-Time-Analysis/web';
 	
 
 	public abstract function price($journeycostobject);
@@ -45,7 +45,7 @@ class bus extends transportType
 {
 	public $ID = 'Bus';
 	public $englishName = 'Bus';
-	public $imgURI = '/user/assets/images/icon-buses.gif';
+	public $imgURI = '/img/icon-buses.gif';
 	
 	public $startHour;
 	public $startMinute;
@@ -81,7 +81,7 @@ class walk extends transportType
 {
 	public $ID = 'Fussweg';
 	public $englishName = 'Walk';
-	public $imgURI = '/user/assets/images/icon-walk.gif';
+	public $imgURI = '/img/icon-walk.gif';
 	
 	public function price($journeycostobject) {
 		$journeycostobject['inzonejourney'] = false;
@@ -93,7 +93,7 @@ class tube extends transportType
 {
 	public $ID = 'Underground';
 	public $englishName = 'Tube';
-	public $imgURI = '/user/assets/images/icon-tube.gif';
+	public $imgURI = '/img/icon-tube.gif';
 	public $start;
 	public $end;
 	public $startHour;

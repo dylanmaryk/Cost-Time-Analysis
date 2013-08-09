@@ -133,7 +133,7 @@ if (!$invalidPostcode && ((string)$xml->itdTripRequest->itdMessage == "")) {
 		$arrival = date ('H:i', strtotime($endHour . ':' . $endMinute));
 		$duration  = date ('H:i', strtotime($travelTime));
 	
-		$detailsLink = '/details.html';/*'http://journeyplanner.tfl.gov.uk/user/XSLT_TRIP_REQUEST2'
+		$detailsLink = 'details.html';/*'http://journeyplanner.tfl.gov.uk/user/XSLT_TRIP_REQUEST2'
 		. $tflurlquery . '&itdLPxx_view=detail&calcNumberOfTrips=1&noAlt=1&itdTime='
 		. $departure . '&itdTripDateTimeDepArr=dep';*/
 		$thisroute = new route($departure, $arrival, $duration, $detailsLink, $interchanges,$means);
