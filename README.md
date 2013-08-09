@@ -47,3 +47,7 @@ Euston to Watford juction services do not follow normal zoning rules for juorney
 
 #Today I Learned
 TIL: the highest oyster card cap is £19.60 :O
+
+#details link
+
+only the top details link for WD5 0DH works
