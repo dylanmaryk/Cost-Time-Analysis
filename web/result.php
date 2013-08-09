@@ -1,13 +1,15 @@
-<?php  
+<?php
+	error_reporting(E_ALL);
+	ini_set('display_errors', 'on');  
   include_once 'transportType.class.php';
   include_once 'route.class.php';
+
+  $invalidPostcode = false;
   
-  $showResults = ($_POST['request'] == 'results');
+  $showResults = (array_key_exists('request',$_POST)? $_POST['request'] == 'results': false);
   $originpostcode = '';
   $destinationpostcode = '';
   if($showResults) {
-	error_reporting(E_ALL);
-	ini_set('display_errors', 'on');
     $deparr = $_POST['arrdep'];
     $tripTime = $_POST['currentTime'];
     $originpostcode = $_POST['startAddress'];
@@ -37,6 +39,7 @@
 		'id' => 2,
 		'value' => (false)));
       include 'tflxmlparser.php';
+      //usort ($routes, function($a,$b){ return($a->departure > $b->departure)});
     } else {
     $means = array(
 	0 => array(
