@@ -39,7 +39,7 @@
 		'id' => 2,
 		'value' => (false)));
       include 'tflxmlparser.php';
-      //usort ($routes, function($a,$b){ return($a->departure > $b->departure)});
+      usort ($routes, function($a,$b){ return($a->departure > $b->departure);});
     } else {
     $means = array(
 	0 => array(
