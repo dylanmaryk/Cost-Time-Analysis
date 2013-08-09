@@ -148,7 +148,7 @@
           </div>
           <div class="col-lg-5">
             <input type="text" class="form-control" id="currentTime" name="currentTime"
-            value="<?php if(!isset($tripTime)){ date_default_timezone_set('Europe/London'); echo date('H:i'); } else { echo $tripTime; }?>">
+            value="<?php if(!isset($tripTime)){ /*date_default_timezone_set('Europe/London'); echo date('H:i');*/ echo "11:00"; } else { echo $tripTime; }?>">
           </div>
         </div>
         <div class="form-group">
