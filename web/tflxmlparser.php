@@ -71,7 +71,7 @@ if (!$invalidPostcode && ((string)$xml->itdTripRequest->itdMessage == "")) {
 	//echo $routes->asXML();
 
 	// iterate through all the routes and print out the start and end times.
-	$i = count($routes) - 1;
+	$i = count($routes);
 	foreach ($xmlroutes->itdRoute as $route) {
 		$routesToZones = array();
 		if ($route->itdFare->count() != 0) {
