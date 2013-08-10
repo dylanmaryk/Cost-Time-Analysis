@@ -68,8 +68,8 @@
         useDefaults = function() {
           start = document.getElementById('startAddress');
           end = document.getElementById('endAddress');
-          start.value = 'WD5 0DH';
-          end.value = 'DA5 1AN';
+          start.value = 'SW1Y 4TE';
+          end.value = 'E16 1XL';
         }
         getPostcode = function() {
           document.getElementById("startAddress").value = document.getElementById("geo").innerHTML;
